@@ -19,24 +19,23 @@ public class User extends BaseEntity {
 	 */
 	
 	@Column(length=255, unique=false)
-	@NotNull
+//	@NotNull
 	@Length(min=3, max=255)
 	private String firstname;
 	
-	@Column(length=255, unique=false)
-	@NotNull
-	@Length(min=3, max=255)
-	private String lastname;
-	
-	@Column(length=255, unique=true)
-	@NotNull
-	@Length(min=10, max=255)
-	private String email;
-	
-	@Column(length=150, unique=false)
-	@NotNull
-	@Length(min=8, max=255)	
-	private String password;
+//	@Column(length=255, unique=false)
+//	@Length(min=3, max=255)
+//	private String lastname;
+
+//	@Column(length=255, unique=true)
+//	@NotNull
+//	@Length(min=10, max=255)
+//	private String email;
+//	
+//	@Column(length=150, unique=false)
+//	@NotNull
+//	@Length(min=8, max=255)	
+//	private String password;
 
 	
 	/**
@@ -51,36 +50,36 @@ public class User extends BaseEntity {
 		this.firstname = firstname;
 	}
 	
-	public String getLastname() {
-		return lastname;
-	}
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
+//	public String getLastname() {
+//		return lastname;
+//	}
+//	public void setLastname(String lastname) {
+//		this.lastname = lastname;
+//	}
 	
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public String getLogin() {
-		return this.firstname + "." + this.lastname;
-	}
-
-	@Override
-	public String toString() {
-		return "User [lastname=" + lastname + ", firstname=" + firstname
-				+ ", email=" + email + ", password=" + password + ", getId()="
-				+ getId() + "]";
-	}
+//	public String getEmail() {
+//		return email;
+//	}
+//	public void setEmail(String email) {
+//		this.email = email;
+//	}
+//
+//	public String getPassword() {
+//		return password;
+//	}
+//	public void setPassword(String password) {
+//		this.password = password;
+//	}
+//	
+//	public String getLogin() {
+//		return this.firstname + "." + this.lastname;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "User [lastname=" + lastname + ", firstname=" + firstname
+//				+ ", email=" + email + ", password=" + password + ", getId()="
+//				+ getId() + "]";
+//	}
 	
 }

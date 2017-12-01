@@ -68,7 +68,6 @@ public class SkillTypeApiController {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         } else if(name != null && !name.equals(entity.getName())) {
             entity.setName(name);
-
             this.manager.update(entity);
         } else {
             response.setStatus(418);
