@@ -62,4 +62,9 @@ public class UserApiController {
         return entity;
     }
     
+    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
+    public User update(HttpServletResponse response, @PathVariable int id, @RequestParam String firstname) {
+    	return null;
+    }
+    
 }
