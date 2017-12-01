@@ -18,13 +18,13 @@ public class SkillDAO extends BaseDAO<Skill> implements ISkillDAO {
 
 	@Override
 	public void delete(Skill item) {
-		entityManager.detach(item);
+		entityManager.remove(item);
 	}
 
-	@Override
+	@SuppressWarnings("unchecked")
+    @Override
 	public List getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.createQuery("SELECT st FROM Skill st").getResultList();
 	}
 
 	@Override
