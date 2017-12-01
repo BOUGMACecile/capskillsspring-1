@@ -49,11 +49,13 @@ public class UserApiController {
     }
     
     @RequestMapping(value="/", method=RequestMethod.POST)
-    public User create(@RequestParam String firstname/*, String lastname*/) {
+    public User create(@RequestParam String firstname, String lastname, String email, String password) {
         User entity = new User();
 
         entity.setFirstname(firstname);
-//        entity.setLastname(lastname);
+        entity.setLastname(lastname);
+        entity.setEmail(email);
+        entity.setPassword(password);
 
         this.manager.create(entity);
 
