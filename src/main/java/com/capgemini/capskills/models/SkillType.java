@@ -1,13 +1,11 @@
 package com.capgemini.capskills.models;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import com.capgemini.capskills.models.base.BaseEntity;
 
@@ -18,7 +16,6 @@ public class SkillType extends BaseEntity {
 
 	@Column(length=150, unique=true)
 	@NotNull
-	@NotBlank
 	@Length(min=3, max=150)
 	private String name;
 	

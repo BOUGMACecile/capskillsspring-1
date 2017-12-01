@@ -1,5 +1,8 @@
 package com.capgemini.capskills.managers.interfaces;
 
-public interface IUserManager {
+import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
+import com.capgemini.capskills.models.User;
+
+public interface IUserManager extends IBaseManager<User> {
 
 }

@@ -18,7 +18,7 @@ public class SkillTypeDAO extends BaseDAO<SkillType> implements ISkillTypeDAO {
 
 	@Override
 	public void delete(SkillType item) {
-		entityManager.detach(item);
+		entityManager.remove(item);
 	}
 
 	@SuppressWarnings("unchecked")
