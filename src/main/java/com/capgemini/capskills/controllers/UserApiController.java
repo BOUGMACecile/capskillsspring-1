@@ -63,7 +63,14 @@ public class UserApiController {
     }
     
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public User update(HttpServletResponse response, @PathVariable int id, @RequestParam String firstname) {
+    public User update(HttpServletResponse response, @PathVariable int id, @RequestParam String firstname/*, String lastname, String email, String password*/) {
+    	
+    	User entity = this.manager.getById(id);
+    	
+    	entity.setFirstname(firstname);
+    	
+    	this.manager.update(entity);
+    	
     	return null;
     }
     
