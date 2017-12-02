@@ -1,4 +1,4 @@
-package com.capgemini.capskills.controllers;
+package com.capgemini.capskills.controllers.api;
 
 import java.util.List;
 
@@ -63,11 +63,23 @@ public class UserApiController {
     }
     
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public User update(HttpServletResponse response, @PathVariable int id, @RequestParam String firstname/*, String lastname, String email, String password*/) {
+    public User update(HttpServletResponse response, @PathVariable int id, @RequestParam String firstname, String lastname, String email, String password) {
     	
     	User entity = this.manager.getById(id);
     	
-    	entity.setFirstname(firstname);
+        if (entity == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        } if(firstname != null && !firstname.equals(entity.getFirstname())) {
+            entity.setFirstname(firstname);
+        } if(lastname != null && !lastname.equals(entity.getLastname())) {
+        	entity.setLastname(lastname);
+        } if(email != null && !email.equals(entity.getEmail())) {
+        	entity.setEmail(email);
+        } if(password != null && !password.equals(entity.getPassword())) {
+        	entity.setPassword(password);
+        } else {
+            response.setStatus(418);
+        }
     	
     	this.manager.update(entity);
     	
