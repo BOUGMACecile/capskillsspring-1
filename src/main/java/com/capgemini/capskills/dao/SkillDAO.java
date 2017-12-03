@@ -10,10 +10,9 @@ import com.capgemini.capskills.models.Skill;
 
 @Transactional
 public class SkillDAO extends BaseDAO<Skill> implements ISkillDAO {
-
 	@Override
 	public void create(Skill item) {
-		entityManager.persist(item);		
+		entityManager.persist(item);
 	}
 
 	@Override
@@ -21,10 +20,10 @@ public class SkillDAO extends BaseDAO<Skill> implements ISkillDAO {
 		entityManager.detach(item);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Skill> getAll() {
+		return entityManager.createQuery("SELECT s FROM Skill s").getResultList();
 	}
 
 	@Override

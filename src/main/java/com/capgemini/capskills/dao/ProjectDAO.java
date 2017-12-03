@@ -10,21 +10,20 @@ import com.capgemini.capskills.models.Project;
 
 @Transactional
 public class ProjectDAO extends BaseDAO<Project> implements IProjectDAO {
-
 	@Override
 	public void create(Project item) {
-		entityManager.persist(item);		
+		entityManager.persist(item);
 	}
 
 	@Override
 	public void delete(Project item) {
-		entityManager.detach(item);
+		entityManager.remove(item);
 	}
 
-	@Override
-	public List getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("unchecked")
+    @Override
+	public List<Project> getAll() {
+		return entityManager.createQuery("SELECT proj FROM Project proj").getResultList();
 	}
 
 	@Override
@@ -36,4 +35,5 @@ public class ProjectDAO extends BaseDAO<Project> implements IProjectDAO {
 	public void update(Project item) {
 		entityManager.merge(item);
 	}
+
 }

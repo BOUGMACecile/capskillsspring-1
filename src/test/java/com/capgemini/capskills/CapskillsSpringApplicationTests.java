@@ -1,4 +1,4 @@
-package com.capgemini;
+package com.capgemini.capskills;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CapskillsApplicationTests {
+public class CapskillsSpringApplicationTests {
 
 	@Test
 	public void contextLoads() {

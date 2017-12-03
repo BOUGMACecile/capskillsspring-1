@@ -13,7 +13,7 @@ public class SkillTypeDAO extends BaseDAO<SkillType> implements ISkillTypeDAO {
 
 	@Override
 	public void create(SkillType item) {
-		entityManager.persist(item);		
+		entityManager.persist(item);
 	}
 
 	@Override

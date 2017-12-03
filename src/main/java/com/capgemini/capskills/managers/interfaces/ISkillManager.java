@@ -1,5 +1,8 @@
 package com.capgemini.capskills.managers.interfaces;
 
-public interface ISkillManager {
+import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
+import com.capgemini.capskills.models.Skill;
+
+public interface ISkillManager extends IBaseManager<Skill> {
 
 }
