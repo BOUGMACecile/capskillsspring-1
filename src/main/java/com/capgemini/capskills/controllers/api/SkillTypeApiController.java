@@ -1,4 +1,4 @@
-package com.capgemini.capskills.controllers;
+package com.capgemini.capskills.controllers.api;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -123,7 +123,6 @@ public class SkillTypeApiController {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         } else if(skillTypeName != null && !skillTypeName.equals(entity.getSkillTypeName())) {
             entity.setSkillTypeName(skillTypeName);
-
             this.manager.update(entity);
         } else {
             response.setStatus(418);
