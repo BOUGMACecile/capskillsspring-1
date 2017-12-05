@@ -3,8 +3,6 @@ package com.capgemini.capskills.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.Length;
 
 import com.capgemini.capskills.models.base.BaseEntity;
@@ -73,11 +71,11 @@ public class User extends BaseEntity {
 //		return this.firstname + "." + this.lastname;
 //	}
 //
-//	@Override
-//	public String toString() {
-//		return "User [lastname=" + lastname + ", firstname=" + firstname
-//				+ ", email=" + email + ", password=" + password + ", getId()="
-//				+ getId() + "]";
-//	}
+	@Override
+	public String toString() {
+		return "User [lastname=" + lastname + ", firstname=" + firstname
+				+ ", email=" + email + ", password=" + password + ", getId()="
+				+ getId() + "]";
+	}
 	
 }

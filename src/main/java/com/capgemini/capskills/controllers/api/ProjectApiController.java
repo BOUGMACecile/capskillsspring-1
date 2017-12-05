@@ -1,4 +1,4 @@
-package com.capgemini.capskills.controllers;
+package com.capgemini.capskills.controllers.api;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,20 +1,16 @@
 package com.capgemini.capskills.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.capgemini.capskills.models.base.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -24,13 +20,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(
 		name = "skill",
 		uniqueConstraints=@UniqueConstraint(columnNames="id")
-		)
+	)
 
 public class Skill extends BaseEntity {
 
 	private String name;
-	//private SkillType type;
-
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "skill_type_id")
