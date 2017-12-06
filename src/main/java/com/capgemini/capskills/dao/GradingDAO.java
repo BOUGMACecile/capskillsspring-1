@@ -2,10 +2,13 @@ package com.capgemini.capskills.dao;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.capgemini.capskills.dao.base.BaseDAO;
 import com.capgemini.capskills.dao.interfaces.IGradingDAO;
 import com.capgemini.capskills.models.Grading;
 
+@Transactional
 public class GradingDAO extends BaseDAO<Grading> implements IGradingDAO{
 
 	@Override
@@ -21,7 +24,7 @@ public class GradingDAO extends BaseDAO<Grading> implements IGradingDAO{
 	@Override
 	public List getAll() {
 		// TODO Auto-generated method stub
-		return null;
+				return entityManager.createQuery("SELECT g FROM Grading g").getResultList();
 	}
 
 	@Override
