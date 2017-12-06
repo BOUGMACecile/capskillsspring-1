@@ -1,7 +1,11 @@
 package com.capgemini.capskills.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.Length;
 
@@ -30,14 +34,26 @@ public class User extends BaseEntity {
 	private String email;
 	
 	@Column(length=150, unique=false)
-	@Length(min=8, max=255)	
+	@Length(min=8, max=150)	
 	private String password;
+	
+	@OneToMany
+	private List<Skill> skills = new ArrayList<Skill>();
 
 	
 	/**
 	 * Getters and Setters
 	 * @return
 	 */
+	
+	
+	public List<Skill> getSkills() {
+		return skills;
+	}
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
+	
 	
 	public String getFirstname() {
 		return firstname;
@@ -71,11 +87,17 @@ public class User extends BaseEntity {
 //		return this.firstname + "." + this.lastname;
 //	}
 //
+	
+	/**
+	 * toString method
+	 */
+	
 	@Override
 	public String toString() {
 		return "User [lastname=" + lastname + ", firstname=" + firstname
 				+ ", email=" + email + ", password=" + password + ", getId()="
 				+ getId() + "]";
 	}
+
 	
 }
