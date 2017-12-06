@@ -5,7 +5,13 @@ import org.springframework.stereotype.Repository;
 import com.capgemini.capskills.dao.interfaces.base.IBaseDAO;
 import com.capgemini.capskills.models.Grading;
 
+
 @Repository
 public interface IGradingDAO extends IBaseDAO<Grading> {
+	
+	
+	
+
+
 
 }

@@ -13,7 +13,7 @@ import com.capgemini.capskills.models.base.BaseEntity;
 public abstract class BaseManager<T extends BaseEntity> implements IBaseManager<T> {
 
 	@Autowired
-	private IBaseDAO<T> dao;
+	private IBaseDAO<T> dao;// déclaration d'1 attribut de type base dao
 
 	@Override
 	public void create(T item) {
@@ -39,5 +39,4 @@ public abstract class BaseManager<T extends BaseEntity> implements IBaseManager<
 	public void update(T item) {
 		dao.update(item);
 	}
-	
 }

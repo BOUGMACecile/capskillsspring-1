@@ -1,11 +1,11 @@
-package com.capgemini.capskills.controllers;
+package com.capgemini.capskills.controllers.views;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.capgemini.capskills.controllers.SkillTypeController;
 import com.capgemini.capskills.controllers.base.BaseController;
+import com.capgemini.capskills.controllers.views.SkillTypeController;
 import com.capgemini.capskills.models.SkillType;
 
 @Controller

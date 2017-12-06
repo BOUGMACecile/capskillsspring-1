@@ -10,8 +10,10 @@ import com.capgemini.capskills.models.base.BaseEntity;
 
 @Service
 @Transactional
-public abstract class BaseDAO<T> extends BaseEntity {
+public abstract class BaseDAO<T extends BaseEntity> {
 
 	@PersistenceContext
 	protected EntityManager entityManager;
+
+	
 }

@@ -18,13 +18,13 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
 
 	@Override
 	public void delete(User item) {
-		entityManager.detach(item);
+		entityManager.remove(item);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> getAll() {
+		return entityManager.createQuery("SELECT u FROM User u").getResultList();
 	}
 
 	@Override

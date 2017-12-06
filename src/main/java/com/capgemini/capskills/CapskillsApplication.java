@@ -5,13 +5,33 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.capgemini.capskills.dao.GradingDAO;
+
+//Import dao
+import com.capgemini.capskills.dao.ProjectDAO;
+import com.capgemini.capskills.dao.SkillDAO;
+
 import com.capgemini.capskills.dao.SkillTypeDAO;
+import com.capgemini.capskills.dao.UserDAO;
 import com.capgemini.capskills.dao.interfaces.base.IBaseDAO;
+
 import com.capgemini.capskills.managers.GradingManager;
+
+
+//Import managers
+import com.capgemini.capskills.managers.ProjectManager;
+import com.capgemini.capskills.managers.SkillManager;
+
 import com.capgemini.capskills.managers.SkillTypeManager;
+import com.capgemini.capskills.managers.UserManager;
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
 import com.capgemini.capskills.models.Grading;
+
+
+//Import entities
+import com.capgemini.capskills.models.Project;
+import com.capgemini.capskills.models.Skill;
 import com.capgemini.capskills.models.SkillType;
+import com.capgemini.capskills.models.User;
 
 @SpringBootApplication
 public class CapskillsApplication {
@@ -30,8 +50,6 @@ public class CapskillsApplication {
 		return new SkillTypeDAO();
 	}
 
-
-
 	
 	@Bean
 	public IBaseManager<Grading> getGradingManager(){
@@ -42,4 +60,37 @@ public class CapskillsApplication {
 	public IBaseDAO<Grading> getGradingDAO(){
 		return new GradingDAO();
 	}
+
+	
+	@Bean
+	public IBaseManager<User> getUserManager(){
+		return new UserManager();
+	}
+	
+	@Bean
+	public IBaseDAO<User> getUserDAO() {
+		return new UserDAO();
+	}
+	
+	@Bean
+	public IBaseManager<Project> getProjectManager(){
+		return new ProjectManager();
+	}
+
+	@Bean
+	public IBaseDAO<Project> getProjectDAO(){
+		return new ProjectDAO();
+	}
+	
+	@Bean
+	public IBaseManager<Skill> getSkillManager(){
+		return new SkillManager();
+	}
+
+	@Bean
+	public IBaseDAO<Skill> getSkillDAO(){
+		return new SkillDAO();
+	}
+	
+
 }

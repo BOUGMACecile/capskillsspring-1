@@ -1,5 +1,14 @@
 package com.capgemini.capskills.managers.interfaces;
 
-public interface IGradingManager {
+
+import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
+import com.capgemini.capskills.models.Grading;
+
+public interface IGradingManager extends IBaseManager<Grading> {
+	
+	
+	
+
+
 
 }

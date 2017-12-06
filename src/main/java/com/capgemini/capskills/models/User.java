@@ -3,8 +3,6 @@ package com.capgemini.capskills.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.Length;
 
 import com.capgemini.capskills.models.base.BaseEntity;
@@ -19,22 +17,19 @@ public class User extends BaseEntity {
 	 */
 	
 	@Column(length=255, unique=false)
-	@NotNull
+//	@NotNull
 	@Length(min=3, max=255)
 	private String firstname;
 	
 	@Column(length=255, unique=false)
-	@NotNull
 	@Length(min=3, max=255)
 	private String lastname;
-	
+
 	@Column(length=255, unique=true)
-	@NotNull
 	@Length(min=10, max=255)
 	private String email;
 	
 	@Column(length=150, unique=false)
-	@NotNull
 	@Length(min=8, max=255)	
 	private String password;
 
@@ -72,10 +67,10 @@ public class User extends BaseEntity {
 		this.password = password;
 	}
 	
-	public String getLogin() {
-		return this.firstname + "." + this.lastname;
-	}
-
+//	public String getLogin() {
+//		return this.firstname + "." + this.lastname;
+//	}
+//
 	@Override
 	public String toString() {
 		return "User [lastname=" + lastname + ", firstname=" + firstname
