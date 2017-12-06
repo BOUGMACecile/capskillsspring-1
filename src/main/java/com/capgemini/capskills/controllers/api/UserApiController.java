@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
 import com.capgemini.capskills.models.Skill;
-import com.capgemini.capskills.models.SkillType;
 import com.capgemini.capskills.models.User;
 
 @RestController

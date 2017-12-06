@@ -21,9 +21,9 @@ public class GradingDAO extends BaseDAO<Grading> implements IGradingDAO{
 		entityManager.detach(item);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List getAll() {
-		// TODO Auto-generated method stub
+	public List<Grading> getAll() {
 				return entityManager.createQuery("SELECT g FROM Grading g").getResultList();
 	}
 

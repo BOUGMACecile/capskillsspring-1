@@ -1,7 +1,6 @@
 package com.capgemini.capskills.configurations.security.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.capskills.configurations.security.dao.ISecurityRoleCrudRepository;
@@ -13,8 +12,10 @@ import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
+	
     @Autowired
     private ISecurityUserCrudRepository userRepository;
+    
     @Autowired
     private ISecurityRoleCrudRepository roleRepository;
 

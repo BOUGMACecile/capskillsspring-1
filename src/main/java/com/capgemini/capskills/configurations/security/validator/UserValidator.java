@@ -11,6 +11,7 @@ import com.capgemini.capskills.configurations.security.service.UserService;
 
 @Component
 public class UserValidator implements Validator {
+	
     @Autowired
     private UserService userService;
 

@@ -99,10 +99,5 @@ public class SkillType extends BaseEntity {
 	public String toString() {
 		return "SkillType [skillTypeName=" + skillTypeName + ", skills=" + skills.toString() + "]";
 	}
-
-
-	
-	
-    
 	
 }
