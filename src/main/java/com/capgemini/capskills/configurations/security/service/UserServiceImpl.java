@@ -1,15 +1,15 @@
 package com.capgemini.capskills.configurations.security.service;
 
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.capskills.configurations.security.dao.ISecurityRoleCrudRepository;
 import com.capgemini.capskills.configurations.security.dao.ISecurityUserCrudRepository;
 import com.capgemini.capskills.configurations.security.models.SecurityRole;
 import com.capgemini.capskills.configurations.security.models.SecurityUser;
-import com.capgemini.capskills.configurations.security.service.UserService;
+
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,4 +30,3 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByLogin(login);
     }
 }
-

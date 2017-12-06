@@ -39,7 +39,6 @@ public class SkillType extends BaseEntity {
     public List<Skill> getSkills() {
 		return skills;
 	}
-
    
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
