@@ -46,25 +46,18 @@ public class User extends BaseEntity {
 	 * @return
 	 */
 	
-	
-	public List<Skill> getSkills() {
-		return skills;
-	}
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
-	}
-	
-	
 	public String getFirstname() {
 		return firstname;
 	}
+
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
-	
+
 	public String getLastname() {
 		return lastname;
 	}
+	
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
@@ -72,6 +65,7 @@ public class User extends BaseEntity {
 	public String getEmail() {
 		return email;
 	}
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -79,18 +73,57 @@ public class User extends BaseEntity {
 	public String getPassword() {
 		return password;
 	}
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public List<Skill> getSkills() {
+		return skills;
+	}
+	
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
+	
+	/**
+	 * Methods
+	 * @param skill
+	 */
+	
+	public void addSkill(Skill skill) {
+        skills.add(skill);
+        skill.setUser(this);
+    }
+ 
+    public void removeSkill(Skill skill) {
+    	skills.remove(skill);
+    	skill.setUser(null);
+    }
+    
+    /**
+     * Constructors
+     */
+    
+    public User() {
+    	
+    }
+    
+    public User(String firstname, String lastname, String email, String password) {
+    	this.firstname = firstname;
+    	this.lastname = lastname;
+    	this.email = email;
+    	this.password = password;
+    }
+	
+	
+	
 	
 //	public String getLogin() {
 //		return this.firstname + "." + this.lastname;
 //	}
 //
 	
-	/**
-	 * toString method
-	 */
 	
 	@Override
 	public String toString() {
