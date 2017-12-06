@@ -31,17 +31,15 @@ public class Skill extends BaseEntity {
 	@Column(name = "skill_name")
 	private String name;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "skill_type_id")
 	private SkillType skillType;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@ManyToMany(mappedBy = "skills")
-	private List<Project> projects;
-	
+
 	/**
 	 * Getters & Setters
 	 * @param skillType
@@ -74,14 +72,7 @@ public class Skill extends BaseEntity {
 		this.user = user;
 	}	
 
-	@JsonIgnore
-	public List<Project> getProjects() {
-		return projects;
-	}
 	
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
-	}
 	
 	/**
 	 * Constructors
@@ -99,7 +90,7 @@ public class Skill extends BaseEntity {
 	
 	@Override
 	public String toString() {
-		return "Skill [name=" + name + ", skillType=" + skillType + ", projects=" + projects + "]";
+		return "Skill [name=" + name + ", skillType=" + skillType  +  "]";
 	}
 	
 }

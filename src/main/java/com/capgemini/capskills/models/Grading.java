@@ -2,7 +2,9 @@ package com.capgemini.capskills.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -14,13 +16,13 @@ import com.capgemini.capskills.models.base.BaseEntity;
 public class Grading extends BaseEntity {
 
 	// @Id
-	@ManyToMany
+	@ManyToOne
 	private User user;
 	// @Id
-	@ManyToMany
+	@ManyToOne
 	private Skill skill;
 	// @Id
-	@ManyToMany
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Project project;
 
 	private Integer collaboratorgrade;
