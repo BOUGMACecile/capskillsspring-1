@@ -52,12 +52,12 @@ public class GradingApiController {
     }
     
     @RequestMapping(value="/", method=RequestMethod.POST)
-    public Grading create(@RequestParam Integer collaboratorgrade, @RequestParam Integer targetgrade, @RequestParam Integer initialgrade) {
+    public Grading create(@RequestParam Integer collaboratorgrade, @RequestParam Integer targetgrade, @RequestParam Integer actualgrade) {
     	Grading entity = new Grading();
 
         entity.setCollaboratorgrade(collaboratorgrade);
         entity.setTargetgrade(targetgrade);
-        entity.setInitialgrade(initialgrade);
+        entity.setActualgrade(actualgrade);
 
         this.manager.create(entity);
 
