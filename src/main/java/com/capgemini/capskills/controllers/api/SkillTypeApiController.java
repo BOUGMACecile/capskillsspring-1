@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
-import com.capgemini.capskills.models.Project;
 import com.capgemini.capskills.models.Skill;
 import com.capgemini.capskills.models.SkillType;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -33,8 +32,7 @@ public class SkillTypeApiController {
     public List<SkillType> getAll() {
         return this.manager.getAll();
     }
-    private  AtomicInteger counter = new AtomicInteger();
-     
+         
     // Récupérer 1 skill type dans la BDD
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public SkillType get(@PathVariable Integer id, HttpServletResponse response) throws JsonProcessingException {
@@ -68,7 +66,25 @@ public class SkillTypeApiController {
 
         return entity;
     }
+    
+    // Mise à jour d'1 skill type
+    @RequestMapping(value="/{skillTypeId}", method=RequestMethod.PUT)
+    public SkillType update(HttpServletResponse response, @PathVariable int skillTypeId, @RequestParam String skillTypeName) {
+        SkillType entity = this.manager.getById(skillTypeId);
 
+        if (entity == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        } else if(skillTypeName != null && !skillTypeName.equals(entity.getSkillTypeName())) {
+            entity.setSkillTypeName(skillTypeName);
+            this.manager.update(entity);
+        } else {
+            response.setStatus(418);
+        }
+
+        return entity;
+    }
+
+    
     //Créer 1 Skill dans la BDD en spécifiant le Skill type auquel il appartient
     @RequestMapping(value="/{skillTypeId}/skill", method=RequestMethod.POST)
     public SkillType createSkill (HttpServletResponse response, @PathVariable int skillTypeId, @RequestParam(value = "skillName") String skillName) {
@@ -114,25 +130,7 @@ public class SkillTypeApiController {
         return type;
     }
     
-    // Mise à jour d'1 skill type
-    @RequestMapping(value="/{skillTypeId}", method=RequestMethod.PUT)
-    public SkillType update(HttpServletResponse response, @PathVariable int skillTypeId, @RequestParam String skillTypeName) {
-        SkillType entity = this.manager.getById(skillTypeId);
-
-        if (entity == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        } else if(skillTypeName != null && !skillTypeName.equals(entity.getSkillTypeName())) {
-            entity.setSkillTypeName(skillTypeName);
-            this.manager.update(entity);
-        } else {
-            response.setStatus(418);
-        }
-
-        return entity;
-    }
-
   // Insert tous les 6 ST automatiquement dans la BDD
-    
     @RequestMapping(value="/fill", method=RequestMethod.POST)
     public List<SkillType> fill() {
         for (String skillTypeName : Arrays.asList("Language", "Network", "Database", "Management","Tools","Soft")) {
@@ -144,16 +142,16 @@ public class SkillTypeApiController {
     }
     
   //afficher la liste des skills d'un skillType
-  		@RequestMapping(value="/{skillTypeId}/skills", method=RequestMethod.GET)
-  		public List<Skill> showProjectSkills (HttpServletResponse response, @PathVariable int skillTypeId) {
-  			SkillType entity = this.manager.getById(skillTypeId);
-  			List<Skill> skills= new ArrayList<Skill>();
-  			if (entity== null) {
-  				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-  			} else {
-  				skills=entity.getSkills();
-  			}
+	@RequestMapping(value="/{skillTypeId}/skills", method=RequestMethod.GET)
+	public List<Skill> showProjectSkills (HttpServletResponse response, @PathVariable int skillTypeId) {
+		SkillType entity = this.manager.getById(skillTypeId);
+		List<Skill> skills= new ArrayList<Skill>();
+		if (entity== null) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		} else {
+			skills=entity.getSkills();
+		}
 
-  			return skills;
-  		}
+		return skills;
+	}
 }

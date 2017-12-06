@@ -1,5 +1,7 @@
 package com.capgemini.capskills.controllers.api;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
+import com.capgemini.capskills.models.Skill;
+import com.capgemini.capskills.models.SkillType;
 import com.capgemini.capskills.models.User;
 
 @RestController
@@ -86,4 +90,79 @@ public class UserApiController {
     	return null;
     }
     
+    /**
+     * This method binds a skill to a user
+     * @param response
+     * @param skillTypeId
+     * @param skillName
+     * @return
+     */
+    @RequestMapping(value="/{userId}/skill", method=RequestMethod.POST)
+    public User createSkill(HttpServletResponse response, @PathVariable int userId, @RequestParam(value = "skillName") String skillName) {
+    	User entity = this.manager.getById(userId);
+
+        if (entity == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        } else if(skillName != null ) {
+            entity.addSkill(new Skill(skillName));
+            this.manager.create(entity);
+           
+        } else {
+            response.setStatus(418);
+        }
+        return entity;
+    }
+
+    /**
+     * This method deletes a skill from an user
+     * @param skillTypeId
+     * @param skillId
+     * @return
+     */
+    @RequestMapping(value = "/{userId}/skills/{skillId}", method = RequestMethod.DELETE)
+    public User deleteSkill(@PathVariable Integer userId, @PathVariable Integer skillId) {
+        User type = this.manager.getById(userId);
+      
+        if (type != null) {
+        	//on parcoure la liste des skillType afin de retrouver le skill que l'on doit supprimer
+        	Iterator<Skill> iterator = type.getSkills().iterator();
+        	//on intialise un bouleen find à false, sa valeur sera à true trouve si l'on trouve lélément à supprimer
+        	boolean find = false;
+        	Skill skill = null;
+    		while (iterator.hasNext() && find==false) {
+    			skill=iterator.next();
+//    			if(skill.getId() == skillId) {
+    			if(skill.getId().equals(skillId)) {
+    				find=true;
+    			}
+    		}
+    		if(find == true)
+    			{
+    			//suppression du skill dans l'objet de persistance
+    			type.removeSkill(skill);  		
+    			//MAJ de la BDD
+    			this.manager.update(type);
+    			}
+        }
+        
+        return type;
+    }
+
+    /**
+     * Display the skills of an user
+     * @param response
+     * @param skillTypeId
+     * @return
+     */
+  	@RequestMapping(value="/{userId}/skills", method=RequestMethod.GET)
+  	public List<Skill> showUserSkills(HttpServletResponse response, @PathVariable int userId) {
+  		User entity = this.manager.getById(userId);
+  		List<Skill> skills = new ArrayList<Skill>();
+  		if (entity== null) {
+  			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+  		} else {
+  			skills = entity.getSkills();
+  		}
+  		return skills;
+  	}
 }

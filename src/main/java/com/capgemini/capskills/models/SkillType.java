@@ -21,6 +21,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 )
 public class SkillType extends BaseEntity {
 
+	/**
+	 * Class Attributes
+	 */
 	
     @Column(name="skill_type_name")
     private String skillTypeName;
@@ -33,46 +36,53 @@ public class SkillType extends BaseEntity {
             orphanRemoval = true
         )
     @JsonBackReference
-    private List<Skill> skills=new ArrayList<Skill>();
+    private List<Skill> skills = new ArrayList<Skill>();
+    
+    /**
+     * Getters & Setters
+     * @return
+     */
+
+	public String getSkillTypeName() {
+		return skillTypeName;
+	}
+
+	public void setSkillTypeName(String skillTypeName) {
+		this.skillTypeName = skillTypeName;
+	}
     
     @JsonBackReference
     public List<Skill> getSkills() {
 		return skills;
 	}
-
    
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
 	}
 
 
+	/**
+	 * Constructors
+	 */
+	
 	public SkillType() {
-    }
-    
-    
+	}
+        
 	public SkillType(String skillTypeName) {
-		super();
-		
+		super();	
 		this.skillTypeName = skillTypeName;
 	}
 
 	public SkillType(Integer id, String skillTypeName) {
 		super(id);
-		
 		this.skillTypeName = skillTypeName;
 	}
 	
-	
-	public String getSkillTypeName() {
-		return skillTypeName;
-	}
 
-
-	public void setSkillTypeName(String skillTypeName) {
-		this.skillTypeName = skillTypeName;
-	}
-
-
+	/**
+	 * Methods
+	 * @param skill
+	 */
 
 	public void addSkill(Skill skill) {
         skills.add(skill);
