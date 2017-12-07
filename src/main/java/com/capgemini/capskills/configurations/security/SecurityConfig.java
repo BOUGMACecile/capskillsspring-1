@@ -17,21 +17,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 
 		httpSecurity
-				.authorizeRequests()
-				.anyRequest()
-				.authenticated()
-			.and()
+				//.authorizeRequests()
+				//.anyRequest()
+				//.authenticated()
+			/*.and()
 				.formLogin()
 					.loginPage("/login")
 					.usernameParameter("username").passwordParameter("password")
-					.permitAll()
-			.and()
-        		.httpBasic()
-        	/*.and()
+					.permitAll()*/
+			//.and()
+        		//.httpBasic()
+        	//.and()
         		.authorizeRequests().anyRequest().anonymous()
         		.antMatchers("/api","/api/**")
-        		.permitAll()*/
+        		.permitAll()
         	;
+		httpSecurity.csrf().disable();
 	}
 	
 }
