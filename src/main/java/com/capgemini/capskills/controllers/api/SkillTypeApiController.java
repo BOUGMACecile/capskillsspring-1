@@ -52,16 +52,16 @@ public class SkillTypeApiController {
      * @return
      * @throws JsonProcessingException
      */
-    @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    public SkillType get(@PathVariable Integer id, HttpServletResponse response) throws JsonProcessingException {
-        SkillType entity = this.manager.getById(id);
-
-        if (entity == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        }
-        System.out.println(new ObjectMapper().writeValueAsString(entity.getSkills()));
-        return entity;
-    }
+//    @RequestMapping(value="/{id}", method=RequestMethod.GET)
+//    public SkillType get(@PathVariable Integer id, HttpServletResponse response) throws JsonProcessingException {
+//        SkillType entity = this.manager.getById(id);
+//
+//        if (entity == null) {
+//            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+//        }
+//        System.out.println(new ObjectMapper().writeValueAsString(entity.getSkills()));
+//        return entity;
+//    }
     
     /**
      * Add automatically all the skills
