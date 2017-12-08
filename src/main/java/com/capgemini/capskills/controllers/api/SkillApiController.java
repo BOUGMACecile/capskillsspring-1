@@ -89,15 +89,16 @@ public class SkillApiController {
      * @param name
      * @return
      */
-    @RequestMapping(value="/{userId}/{skillTypeId}/", method=RequestMethod.POST)
-    public Skill create(@PathVariable Integer skillTypeId, @PathVariable Integer userId, @RequestParam(value = "name") String name, HttpServletResponse response) {
+    @RequestMapping(value="/{skillTypeId}/", method=RequestMethod.POST)
+    public Skill create(@PathVariable Integer skillTypeId, @RequestParam(value = "name") String name, HttpServletResponse response) {
         Skill entity = new Skill(); 
         SkillType skillType = this.managerSkillType.getById(skillTypeId);
-        User user = this.managerUser.getById(userId);
         
         entity.setName(name);
         entity.setSkillType(skillType);
-        entity.setUser(user);
+        
+        List<Skill> skills = skillType.getSkills();
+        skills.add(entity);
 
         this.manager.create(entity);
 

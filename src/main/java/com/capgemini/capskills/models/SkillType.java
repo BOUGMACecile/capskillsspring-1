@@ -29,14 +29,8 @@ public class SkillType extends BaseEntity {
     private String skillTypeName;
 
       
-    @OneToMany(
-    		fetch = FetchType.EAGER,
-            mappedBy = "skillType", 
-            cascade = CascadeType.ALL, 
-            orphanRemoval = true
-        )
-    @JsonBackReference
-    private List<Skill> skills = new ArrayList<Skill>();
+    @OneToMany
+	private List<Skill> skills = new ArrayList<Skill>();
     
     /**
      * Getters & Setters
@@ -51,7 +45,6 @@ public class SkillType extends BaseEntity {
 		this.skillTypeName = skillTypeName;
 	}
     
-    @JsonBackReference
     public List<Skill> getSkills() {
 		return skills;
 	}
@@ -77,7 +70,6 @@ public class SkillType extends BaseEntity {
 		super(id);
 		this.skillTypeName = skillTypeName;
 	}
-	
 
 	/**
 	 * Methods

@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
+import com.capgemini.capskills.models.Skill;
 import com.capgemini.capskills.models.SkillType;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -75,6 +77,27 @@ public class SkillTypeApiController {
     }
 
     
+    
+//  //Créer 1 Skill dans la BDD en spécifiant le Skill type auquel il appartient
+//  @RequestMapping(value="/{skillTypeId}/skill", method=RequestMethod.PUT)
+//  public SkillType createSkill (HttpServletResponse response, @PathVariable int skillTypeId, @RequestParam(value = "skillName") String skillName) {
+//  	SkillType entity = this.manager.getById(skillTypeId);
+//
+//      if (entity == null) {
+//          response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+//      } else if(skillName != null ) {
+//    	  Skill skill = new Skill();
+//    	  skill.setName(skillName);
+//          entity.addSkill(skill);
+//          this.manager.update(entity);
+//         
+//      } else {
+//          response.setStatus(418);
+//      }
+//
+//      return entity;
+//  }
+  
     /**
      * Delete a skill type with a specific id
      * @param id
@@ -129,23 +152,7 @@ public class SkillTypeApiController {
 //    }
 
     
-//    //Créer 1 Skill dans la BDD en spécifiant le Skill type auquel il appartient
-//    @RequestMapping(value="/{skillTypeId}/skill", method=RequestMethod.POST)
-//    public SkillType createSkill (HttpServletResponse response, @PathVariable int skillTypeId, @RequestParam(value = "skillName") String skillName) {
-//    	SkillType entity = this.manager.getById(skillTypeId);
-//
-//        if (entity == null) {
-//            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-//        } else if(skillName != null ) {
-//            entity.addSkill(new Skill(skillName));
-//            this.manager.create(entity);
-//           
-//        } else {
-//            response.setStatus(418);
-//        }
-//
-//        return entity;
-//    }
+
     
 //    @RequestMapping(value="/{skillTypeId}/skills/{skillId}", method=RequestMethod.DELETE)
 //    public SkillType deleteSkill(@PathVariable Integer skillTypeId,@PathVariable Integer skillId) {
