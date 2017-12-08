@@ -62,8 +62,7 @@ public class Skill extends BaseEntity {
 	public void setSkillType(SkillType skillType) {
 		this.skillType = skillType;
 	}
-	
-	
+		
 	@JsonManagedReference
 	public User getUser() {
 		return user;
@@ -89,11 +88,6 @@ public class Skill extends BaseEntity {
 	
 	public Skill() {
 		super();
-	}
-	
-	public Skill(String name) {
-		super();
-		this.name = name;
 	}
 	
 	@Override

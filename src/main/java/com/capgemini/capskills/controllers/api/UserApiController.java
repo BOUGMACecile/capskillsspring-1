@@ -17,6 +17,19 @@ import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
 import com.capgemini.capskills.models.Skill;
 import com.capgemini.capskills.models.User;
 
+/**
+ * Implements the following api requests
+ * Get all the users: 						GET URL/users/
+ * Get a specific user with his id:			GET URL/users/{id}
+ * Delete a specific user with his id:		DELETE URL/users/{id}
+ * Add an user writing all the attributes:	POST 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password'
+ * Update an user with all attributes:		PUT 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password'
+ * 
+ * @author quentin.prigent
+ *
+ */
+
+
 @RestController
 @RequestMapping("/users")
 public class UserApiController {
@@ -24,11 +37,26 @@ public class UserApiController {
 	@Autowired
 	private IBaseManager<User> manager;
 	
+	@Autowired
+	private IBaseManager<Skill> managerSkill;
+	
+	/**
+	 * Method get all users
+	 * @return
+	 */
+	
     @RequestMapping(value="/", method=RequestMethod.GET)
     public List<User> getAll() {
         return this.manager.getAll();
     }
 	
+    /**
+     * Method to get a user with a specific id
+     * @param id
+     * @param response
+     * @return
+     */
+    
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public User get(@PathVariable Integer id, HttpServletResponse response) {
         User entity = this.manager.getById(id);
@@ -40,6 +68,12 @@ public class UserApiController {
         return entity;
     }
 	
+    /**
+     * Delete a specific user with his id
+     * @param id
+     * @return
+     */
+    
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
     public User delete(@PathVariable Integer id) {
         User type = this.manager.getById(id);
@@ -50,6 +84,15 @@ public class UserApiController {
 
         return type;
     }
+    
+    /**
+     * Add an user, all the attributes are needed
+     * @param firstname
+     * @param lastname
+     * @param email
+     * @param password
+     * @return
+     */
     
     @RequestMapping(value="/", method=RequestMethod.POST)
     public User create(@RequestParam String firstname, String lastname, String email, String password) {
@@ -64,6 +107,17 @@ public class UserApiController {
 
         return entity;
     }
+
+    /**
+     * Update an user, all the attributes are needed
+     * @param response
+     * @param id
+     * @param firstname
+     * @param lastname
+     * @param email
+     * @param password
+     * @return
+     */
     
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
     public User update(HttpServletResponse response, @PathVariable int id, @RequestParam String firstname, String lastname, String email, String password) {
@@ -96,22 +150,38 @@ public class UserApiController {
      * @param skillName
      * @return
      */
-    @RequestMapping(value="/{userId}/skill", method=RequestMethod.POST)
-    public User createSkill(HttpServletResponse response, @PathVariable int userId, @RequestParam(value = "skillName") String skillName) {
+//    @RequestMapping(value="/{userId}/skillname", method=RequestMethod.POST)
+//    public User createSkill(HttpServletResponse response, @PathVariable int userId, @RequestParam(value = "skillname") String skillName) {
+//    	User entity = this.manager.getById(userId);
+//
+//        if (entity == null) {
+//            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+//        } else if(skillName != null ) {
+//            entity.addSkill(new Skill(skillName));
+//            this.manager.create(entity);
+//           
+//        } else {
+//            response.setStatus(418);
+//        }
+//        return entity;
+//    }
+
+    @RequestMapping(value="/{userId}/{skillId}", method=RequestMethod.POST)
+    public void addSkill(HttpServletResponse response, @PathVariable int userId, int skillId) {
     	User entity = this.manager.getById(userId);
-
-        if (entity == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        } else if(skillName != null ) {
-            entity.addSkill(new Skill(skillName));
-            this.manager.create(entity);
-           
-        } else {
-            response.setStatus(418);
-        }
-        return entity;
+    	Skill skill = this.managerSkill.getById(skillId);
+    	
+    	if (entity == null || skill == null) {
+    		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+    	} else if (entity != null && skill != null) {
+    		entity.addSkill(skill);
+    	} else {
+    		response.setStatus(418);
+    	}
     }
-
+  
+/**************************************************************************************************/    
+    
     /**
      * This method deletes a skill from an user
      * @param skillTypeId
