@@ -29,8 +29,6 @@ public class SkillType extends BaseEntity {
     private String skillTypeName;
 
       
-    @OneToMany
-	private List<Skill> skills = new ArrayList<Skill>();
     
     /**
      * Getters & Setters
@@ -45,13 +43,6 @@ public class SkillType extends BaseEntity {
 		this.skillTypeName = skillTypeName;
 	}
     
-    public List<Skill> getSkills() {
-		return skills;
-	}
-   
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
-	}
 
 
 	/**
@@ -76,20 +67,20 @@ public class SkillType extends BaseEntity {
 	 * @param skill
 	 */
 
-	public void addSkill(Skill skill) {
-        skills.add(skill);
-        skill.setSkillType(this);
-    }
- 
-    public void removeSkill(Skill skill) {
-    	skills.remove(skill);
-    	skill.setSkillType(null);
-    }
+//	public void addSkill(Skill skill) {
+//        skills.add(skill);
+//        skill.setSkillType(this);
+//    }
+// 
+//    public void removeSkill(Skill skill) {
+//    	skills.remove(skill);
+//    	skill.setSkillType(null);
+//    }
 
 
 	@Override
 	public String toString() {
-		return "SkillType [skillTypeName=" + skillTypeName + ", skills=" + skills.toString() + "]";
+		return "SkillType [skillTypeName=" + skillTypeName + " ]";
 	}
 	
 }

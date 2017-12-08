@@ -1,5 +1,6 @@
 package com.capgemini.capskills.controllers.api;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
@@ -81,7 +82,7 @@ public class SkillApiController {
 
         return type;
     }
-    
+   
     /**
      * Create a skill
      * @param skillTypeId
@@ -96,14 +97,24 @@ public class SkillApiController {
         
         entity.setName(name);
         entity.setSkillType(skillType);
-        
-        List<Skill> skills = skillType.getSkills();
-        skills.add(entity);
-
         this.manager.create(entity);
 
         return entity;
     }
+    
+    @RequestMapping(value="/display/{skillTypeId}", method=RequestMethod.GET)
+    public List<Skill> getAllById(@PathVariable Integer skillTypeId) {
+    	List<Skill> unselectedSkills = this.manager.getAll();
+    	List<Skill> skills = new ArrayList<Skill>();
+    	SkillType skillType = this.managerSkillType.getById(skillTypeId);
+    	for(Skill skill : unselectedSkills) {
+    		if(skill.getSkillType() == skillType) {
+    			skills.add(skill);
+    		}
+    	}
+    	return skills;
+    }
+    
     
     /**
      * 

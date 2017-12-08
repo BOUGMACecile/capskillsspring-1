@@ -33,6 +33,7 @@ public class SkillTypeApiController {
 
     @Autowired
     private IBaseManager<SkillType> manager;
+    
 
     /**
      * Get all the skill types
