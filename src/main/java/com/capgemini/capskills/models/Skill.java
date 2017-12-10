@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -34,12 +35,15 @@ public class Skill extends BaseEntity {
 	@JoinColumn(name = "skill_type_id")
 	private SkillType skillType;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+//	@ManyToMany
+//	@JoinColumn(name = "user_id")
+//	private User user;
 	
-	@ManyToMany(mappedBy = "skills")
-	private List<Project> projects;
+//	@ManyToMany(mappedBy = "skills")
+//	private List<Project> projects;
+//	
+//	@ManyToMany
+//	private List<User> users;
 	
 	/**
 	 * Getters & Setters
@@ -63,23 +67,23 @@ public class Skill extends BaseEntity {
 		this.skillType = skillType;
 	}
 		
-	@JsonManagedReference
-	public User getUser() {
-		return user;
-	}
-	
-	public void setUser(User user) {
-		this.user = user;
-	}	
-
-	@JsonIgnore
-	public List<Project> getProjects() {
-		return projects;
-	}
-	
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
-	}
+//	@JsonManagedReference
+//	public User getUser() {
+//		return user;
+//	}
+//	
+//	public void setUser(User user) {
+//		this.user = user;
+//	}	
+//
+//	@JsonIgnore
+//	public List<Project> getProjects() {
+//		return projects;
+//	}
+//	
+//	public void setProjects(List<Project> projects) {
+//		this.projects = projects;
+//	}
 	
 	/**
 	 * Constructors
@@ -92,7 +96,7 @@ public class Skill extends BaseEntity {
 	
 	@Override
 	public String toString() {
-		return "Skill [name=" + name + ", skillType=" + skillType + ", projects=" + projects + "]";
+		return "Skill [name=" + name + ", skillType=" + skillType + ", projects=" /*+ projects */+ "]";
 	}
 	
 }
