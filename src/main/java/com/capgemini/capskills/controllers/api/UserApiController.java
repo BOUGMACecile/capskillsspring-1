@@ -136,7 +136,7 @@ public class UserApiController {
         	entity.setPassword(password);
         } else {
             response.setStatus(418);
-        }
+        } 
     	
     	this.manager.update(entity);
     	
