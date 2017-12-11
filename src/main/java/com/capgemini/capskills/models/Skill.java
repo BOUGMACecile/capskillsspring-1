@@ -2,7 +2,6 @@ package com.capgemini.capskills.models;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -22,76 +21,62 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 		name = "skill",
 		uniqueConstraints=@UniqueConstraint(columnNames="id")
 	)
+
 public class Skill extends BaseEntity {
 
-	/**
-	 * Class Attributes
-	 */
-	
-	@Column(name = "skill_name")
 	private String name;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "skill_type_id")
 	private SkillType skillType;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	private User user;
-	
-
-	/**
-	 * Getters & Setters
-	 * @param skillType
-	 */
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	@JsonManagedReference
 	public SkillType getSkillType() {
 		return skillType;
 	}
-
+	
+	@ManyToMany(mappedBy = "skills")
+	private List<Project> projects;
+	
 	public void setSkillType(SkillType skillType) {
 		this.skillType = skillType;
 	}
-	
-	
-	@JsonManagedReference
-	public User getUser() {
-		return user;
+	public String getName() {
+		return name;
 	}
-	
-	public void setUser(User user) {
-		this.user = user;
-	}	
-
-	
-	
-	/**
-	 * Constructors
-	 * @param name
-	 */
-	
-	public Skill() {
-		super();
+	public void setName(String name) {
+		this.name = name;
 	}
-	
 	public Skill(String name) {
 		super();
 		this.name = name;
 	}
+
+	public Skill( ) {
+		super();
+
+	}
+	
 	
 	@Override
 	public String toString() {
-		return "Skill [name=" + name + ", skillType=" + skillType  +  "]";
+		return "Skill [name=" + name + ", skillType=" + skillType + ", projects=" + projects + "]";
 	}
+	@JsonIgnore
+	public List<Project> getProjects() {
+		return projects;
+	}
+	
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+	public void setUser(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
 	
 }
 
