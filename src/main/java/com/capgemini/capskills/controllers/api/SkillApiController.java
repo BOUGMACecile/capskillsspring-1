@@ -52,7 +52,7 @@ public class SkillApiController {
     public List<Skill> getAll() {
         return this.manager.getAll();
     }   
-    
+
     /**
      * Get a skill with a specific id
      * @param id
