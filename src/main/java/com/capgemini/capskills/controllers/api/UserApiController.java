@@ -70,7 +70,7 @@ public class UserApiController {
     }
 	
     /**
-     * Delete a specific user with his id
+     * Delete a specific user with its id
      * @param id
      * @return
      */

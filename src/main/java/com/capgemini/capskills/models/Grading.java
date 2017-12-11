@@ -7,6 +7,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import com.capgemini.capskills.models.base.BaseEntity;
 
@@ -15,6 +19,10 @@ import com.capgemini.capskills.models.base.BaseEntity;
 		@UniqueConstraint(columnNames = "skill_id"), @UniqueConstraint(columnNames = "project_id") })
 public class Grading extends BaseEntity {
 
+	/**
+	 * Class Attributes
+	 */
+	
 	// @Id
 	@ManyToOne
 	private User user;
@@ -25,31 +33,21 @@ public class Grading extends BaseEntity {
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Project project;
 
+	@Min(0)
+	@Max(5)
 	private Integer collaboratorgrade;
+	
+	@Min(0)
+	@Max(5)
 	private Integer targetgrade;
+	
+	@Min(0)
+	@Max(5)
 	private Integer actualgrade;
 
-	// constructeur referent
-	public Grading(Integer collaboratorgrade, Integer targetgrade) {
-		super();
-		this.collaboratorgrade = collaboratorgrade;
-		this.targetgrade = targetgrade;
-	}
-
-	// constructeur collaborateur
-	public Grading(Integer actualgrade) {
-		super();
-		this.actualgrade = actualgrade;
-	}
-
-	public Grading(Integer collaboratorgrade, Integer targetgrade, Integer actualgrade) {
-		super();
-		this.collaboratorgrade = collaboratorgrade;
-		this.targetgrade = targetgrade;
-		this.actualgrade = actualgrade;
-	}
-
-	// getter and setter
+	/**
+	 * Getters and Setters
+	 */
 
 	public Integer getCollaboratorgrade() {
 		return collaboratorgrade;
@@ -74,11 +72,7 @@ public class Grading extends BaseEntity {
 	public void setActualgrade(Integer actualgrade) {
 		this.actualgrade = actualgrade;
 	}
-
-	// Default Constructor
-	public Grading() {
-	}
-
+	
 	public User getUser() {
 		return user;
 	}
@@ -101,6 +95,34 @@ public class Grading extends BaseEntity {
 
 	public void setProject(Project project) {
 		this.project = project;
+	}
+	
+	/**
+	 * Constructors
+	 */
+	
+	// Default Constructor
+	public Grading() {
+	}
+	
+	// constructeur collaborateur
+	public Grading(Integer actualgrade) {
+		super();
+		this.actualgrade = actualgrade;
+	}
+	
+	// constructeur referent
+	public Grading(Integer collaboratorgrade, Integer targetgrade) {
+		super();
+		this.collaboratorgrade = collaboratorgrade;
+		this.targetgrade = targetgrade;
+	}
+
+	public Grading(Integer collaboratorgrade, Integer targetgrade, Integer actualgrade) {
+		super();
+		this.collaboratorgrade = collaboratorgrade;
+		this.targetgrade = targetgrade;
+		this.actualgrade = actualgrade;
 	}
 
 }
