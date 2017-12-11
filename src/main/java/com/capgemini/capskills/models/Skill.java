@@ -27,13 +27,15 @@ public class Skill extends BaseEntity {
 	/**
 	 * Class Attributes
 	 */
-	
+
 	@Column(name = "skill_name")
 	private String name;
+
 
 	@ManyToOne
 	@JoinColumn(name = "skill_type_id")
 	private SkillType skillType;
+
 
 //	@ManyToMany
 //	@JoinColumn(name = "user_id")
@@ -45,6 +47,7 @@ public class Skill extends BaseEntity {
 //	@ManyToMany
 //	private List<User> users;
 	
+
 	/**
 	 * Getters & Setters
 	 * @param skillType
@@ -85,22 +88,19 @@ public class Skill extends BaseEntity {
 //		this.projects = projects;
 //	}
 	
+
 	/**
 	 * Constructors
 	 * @param name
 	 */
-	
+
 	public Skill() {
 		super();
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Skill [name=" + name + ", skillType=" + skillType + ", projects=" /*+ projects */+ "]";
 	}
-	
+
 }
-
-
-
-

@@ -1,77 +1,106 @@
 package com.capgemini.capskills.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.capgemini.capskills.models.base.BaseEntity;
 
 @Entity
-@Table(name = "grading")
+@Table(name = "grading", uniqueConstraints = { @UniqueConstraint(columnNames = "user_id"),
+		@UniqueConstraint(columnNames = "skill_id"), @UniqueConstraint(columnNames = "project_id") })
 public class Grading extends BaseEntity {
-	
+
+	// @Id
+	@ManyToOne
+	private User user;
+	// @Id
+	@ManyToOne
+	private Skill skill;
+	// @Id
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Project project;
+
 	private Integer collaboratorgrade;
 	private Integer targetgrade;
-	private Integer initialgrade;
-	
-	
+	private Integer actualgrade;
 
-		//Specific Constructor
-		public Grading(Integer collaboratorgrade) {
-			super();
-			this.collaboratorgrade = collaboratorgrade;
-		}
-		
-		public Grading(Integer collaboratorgrade, Integer targetgrade) {
-			super();
-			this.collaboratorgrade = collaboratorgrade;
-			this.targetgrade = targetgrade;
-		}
-		
-		public Grading(Integer collaboratorgrade, Integer targetgrade, Integer initialgrade) {
-			super();
-			this.collaboratorgrade = collaboratorgrade;
-			this.targetgrade = targetgrade;
-			this.initialgrade = initialgrade;
-		}
-		
-		//getter and setter
-		
-		public Integer getCollaboratorgrade() {
-			return collaboratorgrade;
-		}
+	// constructeur referent
+	public Grading(Integer collaboratorgrade, Integer targetgrade) {
+		super();
+		this.collaboratorgrade = collaboratorgrade;
+		this.targetgrade = targetgrade;
+	}
 
-		public void setCollaboratorgrade(Integer collaboratorgrade) {
-			this.collaboratorgrade = collaboratorgrade;
-		}
+	// constructeur collaborateur
+	public Grading(Integer actualgrade) {
+		super();
+		this.actualgrade = actualgrade;
+	}
 
-		public Integer getTargetgrade() {
-			return targetgrade;
-		}
+	public Grading(Integer collaboratorgrade, Integer targetgrade, Integer actualgrade) {
+		super();
+		this.collaboratorgrade = collaboratorgrade;
+		this.targetgrade = targetgrade;
+		this.actualgrade = actualgrade;
+	}
 
-		public void setTargetgrade(Integer targetgrade) {
-			this.targetgrade = targetgrade;
-		}
+	// getter and setter
 
-		public Integer getInitialgrade() {
-			return initialgrade;
-		}
+	public Integer getCollaboratorgrade() {
+		return collaboratorgrade;
+	}
 
-		public void setInitialgrade(Integer initialgrade) {
-			this.initialgrade = initialgrade;
-		}
+	public void setCollaboratorgrade(Integer collaboratorgrade) {
+		this.collaboratorgrade = collaboratorgrade;
+	}
 
-		//Default Constructor
-		public Grading(){}
+	public Integer getTargetgrade() {
+		return targetgrade;
+	}
 
+	public void setTargetgrade(Integer targetgrade) {
+		this.targetgrade = targetgrade;
+	}
 
+	public Integer getActualgrade() {
+		return actualgrade;
+	}
 
+	public void setActualgrade(Integer actualgrade) {
+		this.actualgrade = actualgrade;
+	}
 
-//		@Override
-//		public String toString() {
-//			return "Grading [collaboratorgrade=" + this.collaboratorgrade + ",targetgrade=" + this.targetgrade + ",initialgrade=" + this.initialgrade +"]";
-//		}
+	// Default Constructor
+	public Grading() {
+	}
 
-	
+	public User getUser() {
+		return user;
+	}
 
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Skill getSkill() {
+		return skill;
+	}
+
+	public void setSkill(Skill skill) {
+		this.skill = skill;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
 
 }
