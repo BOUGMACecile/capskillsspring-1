@@ -136,11 +136,22 @@ public class UserApiController {
         	entity.setPassword(password);
         } else {
             response.setStatus(418);
-        }
+        } 
     	
     	this.manager.update(entity);
     	
     	return null;
+    }
+    
+    
+    @RequestMapping(value="/{userId}/{skillId}", method=RequestMethod.PUT)
+    public List<Skill> addSkill(@PathVariable Integer userId, @PathVariable Integer skillId){
+    	User user = this.manager.getById(userId);
+    	Skill skill = this.managerSkill.getById(skillId);
+    	List<Skill> skills = user.getSkills(); 
+    	skills.add(skill);
+    	this.manager.update(user);
+    	return skills;
     }
     
     /**
@@ -166,19 +177,19 @@ public class UserApiController {
 //        return entity;
 //    }
 
-    @RequestMapping(value="/{userId}/{skillId}", method=RequestMethod.POST)
-    public void addSkill(HttpServletResponse response, @PathVariable int userId, int skillId) {
-    	User entity = this.manager.getById(userId);
-    	Skill skill = this.managerSkill.getById(skillId);
-    	
-    	if (entity == null || skill == null) {
-    		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-    	} else if (entity != null && skill != null) {
-    		entity.addSkill(skill);
-    	} else {
-    		response.setStatus(418);
-    	}
-    }
+//    @RequestMapping(value="/{userId}/{skillId}", method=RequestMethod.POST)
+//    public void addSkill(HttpServletResponse response, @PathVariable int userId, int skillId) {
+//    	User entity = this.manager.getById(userId);
+//    	Skill skill = this.managerSkill.getById(skillId);
+//    	
+//    	if (entity == null || skill == null) {
+//    		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+//    	} else if (entity != null && skill != null) {
+//    		entity.addSkill(skill);
+//    	} else {
+//    		response.setStatus(418);
+//    	}
+//    }
   
 /**************************************************************************************************/    
     
@@ -188,50 +199,50 @@ public class UserApiController {
      * @param skillId
      * @return
      */
-    @RequestMapping(value = "/{userId}/skills/{skillId}", method = RequestMethod.DELETE)
-    public User deleteSkill(@PathVariable Integer userId, @PathVariable Integer skillId) {
-        User type = this.manager.getById(userId);
-      
-        if (type != null) {
-        	//on parcoure la liste des skillType afin de retrouver le skill que l'on doit supprimer
-        	Iterator<Skill> iterator = type.getSkills().iterator();
-        	//on intialise un bouleen find à false, sa valeur sera à true trouve si l'on trouve lélément à supprimer
-        	boolean find = false;
-        	Skill skill = null;
-    		while (iterator.hasNext() && find==false) {
-    			skill=iterator.next();
-//    			if(skill.getId() == skillId) {
-    			if(skill.getId().equals(skillId)) {
-    				find=true;
-    			}
-    		}
-    		if(find == true)
-    			{
-    			//suppression du skill dans l'objet de persistance
-    			type.removeSkill(skill);  		
-    			//MAJ de la BDD
-    			this.manager.update(type);
-    			}
-        }
-        
-        return type;
-    }
-
-    /**
-     * Display the skills of an user
-     * @param response
-     * @param skillTypeId
-     * @return
-     */
-  	@RequestMapping(value="/{userId}/skills", method=RequestMethod.GET)
-  	public List<Skill> showUserSkills(HttpServletResponse response, @PathVariable int userId) {
-  		User entity = this.manager.getById(userId);
-  		List<Skill> skills = new ArrayList<Skill>();
-  		if (entity== null) {
-  			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-  		} else {
-  			skills = entity.getSkills();
-  		}
-  		return skills;
-  	}
+//    @RequestMapping(value = "/{userId}/skills/{skillId}", method = RequestMethod.DELETE)
+//    public User deleteSkill(@PathVariable Integer userId, @PathVariable Integer skillId) {
+//        User type = this.manager.getById(userId);
+//      
+//        if (type != null) {
+//        	//on parcoure la liste des skillType afin de retrouver le skill que l'on doit supprimer
+//        	Iterator<Skill> iterator = type.getSkills().iterator();
+//        	//on intialise un bouleen find à false, sa valeur sera à true trouve si l'on trouve lélément à supprimer
+//        	boolean find = false;
+//        	Skill skill = null;
+//    		while (iterator.hasNext() && find==false) {
+//    			skill=iterator.next();
+////    			if(skill.getId() == skillId) {
+//    			if(skill.getId().equals(skillId)) {
+//    				find=true;
+//    			}
+//    		}
+//    		if(find == true)
+//    			{
+//    			//suppression du skill dans l'objet de persistance
+//    			type.removeSkill(skill);  		
+//    			//MAJ de la BDD
+//    			this.manager.update(type);
+//    			}
+//        }
+//        
+//        return type;
+//    }
+//
+//    /**
+//     * Display the skills of an user
+//     * @param response
+//     * @param skillTypeId
+//     * @return
+//     */
+//  	@RequestMapping(value="/{userId}/skills", method=RequestMethod.GET)
+//  	public List<Skill> showUserSkills(HttpServletResponse response, @PathVariable int userId) {
+//  		User entity = this.manager.getById(userId);
+//  		List<Skill> skills = new ArrayList<Skill>();
+//  		if (entity== null) {
+//  			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+//  		} else {
+//  			skills = entity.getSkills();
+//  		}
+//  		return skills;
+//  	}
 }

@@ -20,8 +20,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * Implements the following api requests
  * Get all the skill types: 				GET URL/skill-types/
- * Get a specific skill-type with his id:	GET URL/skill-types/{id}
+ * Get a specific skill type with his id:	GET URL/skill-types/{id}
+ * Add a new skill type:					POST URL/skill-type/?name=name
  * Fill Automatically all the skill types:  POST URL/skill-types/fill
+ * Delete a skill type with a specific id:	DELETE URL/skill-types/{id}
+ * Modify a skill type:						PUT URL/skill-types/?name=name
  * 
  * @author quentin.prigent
  *
@@ -52,16 +55,30 @@ public class SkillTypeApiController {
      * @return
      * @throws JsonProcessingException
      */
-//    @RequestMapping(value="/{id}", method=RequestMethod.GET)
-//    public SkillType get(@PathVariable Integer id, HttpServletResponse response) throws JsonProcessingException {
-//        SkillType entity = this.manager.getById(id);
-//
-//        if (entity == null) {
-//            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-//        }
-//        System.out.println(new ObjectMapper().writeValueAsString(entity.getSkills()));
-//        return entity;
-//    }
+    @RequestMapping(value="/{id}", method=RequestMethod.GET)
+    public SkillType get(@PathVariable Integer id, HttpServletResponse response) throws JsonProcessingException {
+        SkillType entity = this.manager.getById(id);
+
+        if (entity == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
+
+        return entity;
+    }
+    
+    /**
+     * Create a new skill type
+     * @param skillTypeName
+     * @return
+     */
+    @RequestMapping(value="/", method=RequestMethod.POST)
+    public SkillType create(@RequestParam(value = "name") String skillTypeName) {
+        SkillType entity = new SkillType();
+        entity.setSkillTypeName(skillTypeName);
+        this.manager.create(entity);
+
+        return entity;
+    }
     
     /**
      * Add automatically all the skills
@@ -76,6 +93,47 @@ public class SkillTypeApiController {
 
         return this.getAll();
     }
+    
+    /**
+     * Delete a skill type with a specific id
+     * @param id
+     * @return
+     */
+    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+    public SkillType delete(@PathVariable Integer id) {
+        SkillType type = this.manager.getById(id);
+
+        if (type != null) {
+            this.manager.delete(type);
+        }
+
+        return type;
+    }
+    
+    /**
+     * Update a skill type
+     * @param response
+     * @param skillTypeId
+     * @param skillTypeName
+     * @return
+     */
+    @RequestMapping(value="/{id}/", method=RequestMethod.PUT)
+    public SkillType update(HttpServletResponse response, @PathVariable Integer id, @RequestParam(value = "name") String skillTypeName) {
+        SkillType entity = this.manager.getById(id);
+
+        if (entity == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        } else if(skillTypeName != null && !skillTypeName.equals(entity.getSkillTypeName())) {
+            entity.setSkillTypeName(skillTypeName);
+            this.manager.update(entity);
+        } else {
+            response.setStatus(418);
+        }
+
+        return entity;
+    }
+
+    
 
     
     
@@ -98,63 +156,7 @@ public class SkillTypeApiController {
 //
 //      return entity;
 //  }
-  
-    /**
-     * Delete a skill type with a specific id
-     * @param id
-     * @return
-     */
-//    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-//    public SkillType delete(@PathVariable Integer id) {
-//        SkillType type = this.manager.getById(id);
 //
-//        if (type != null) {
-//            this.manager.delete(type);
-//        }
-//
-//        return type;
-//    }
-
-    /**
-     * Create a new skill type
-     * @param skillTypeName
-     * @return
-     */
-//    @RequestMapping(value="/", method=RequestMethod.POST)
-//    public SkillType create(@RequestParam(value = "skillTypeName") String skillTypeName) {
-//        SkillType entity = new SkillType();
-//        entity.setSkillTypeName(skillTypeName);
-//        this.manager.create(entity);
-//
-//        return entity;
-//    }
-    
-    /**
-     * Update a skill type
-     * @param response
-     * @param skillTypeId
-     * @param skillTypeName
-     * @return
-     */
-//    @RequestMapping(value="/{skillTypeId}", method=RequestMethod.PUT)
-//    public SkillType update(HttpServletResponse response, @PathVariable int skillTypeId, @RequestParam String skillTypeName) {
-//        SkillType entity = this.manager.getById(skillTypeId);
-//
-//        if (entity == null) {
-//            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-//        } else if(skillTypeName != null && !skillTypeName.equals(entity.getSkillTypeName())) {
-//            entity.setSkillTypeName(skillTypeName);
-//            this.manager.update(entity);
-//        } else {
-//            response.setStatus(418);
-//        }
-//
-//        return entity;
-//    }
-
-    
-
-    
 //    @RequestMapping(value="/{skillTypeId}/skills/{skillId}", method=RequestMethod.DELETE)
 //    public SkillType deleteSkill(@PathVariable Integer skillTypeId,@PathVariable Integer skillId) {
 //        SkillType type = this.manager.getById(skillTypeId);

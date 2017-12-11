@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.Length;
@@ -36,10 +37,9 @@ public class User extends BaseEntity {
 	@Column(length=150, unique=false)
 	@Length(min=8, max=150)	
 	private String password;
-	
-	@OneToMany
-	private List<Skill> skills = new ArrayList<Skill>();
 
+	@OneToMany
+	private List<Skill> skills;
 	
 	/**
 	 * Getters and Setters
@@ -77,31 +77,16 @@ public class User extends BaseEntity {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public List<Skill> getSkills() {
+    
+    public List<Skill> getSkills() {
 		return skills;
 	}
-	
+
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
 	}
-	
+
 	/**
-	 * Methods
-	 * @param skill
-	 */
-	
-	public void addSkill(Skill skill) {
-        skills.add(skill);
-        skill.setUser(this);
-    }
- 
-    public void removeSkill(Skill skill) {
-    	skills.remove(skill);
-    	skill.setUser(null);
-    }
-    
-    /**
      * Constructors
      */
     
@@ -116,14 +101,11 @@ public class User extends BaseEntity {
     	this.password = password;
     }
 	
-	
-	
-	
+
 //	public String getLogin() {
 //		return this.firstname + "." + this.lastname;
 //	}
-//
-	
+
 	
 	@Override
 	public String toString() {
