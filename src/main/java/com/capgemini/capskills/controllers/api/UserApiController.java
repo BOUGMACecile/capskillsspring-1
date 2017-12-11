@@ -22,8 +22,9 @@ import com.capgemini.capskills.models.User;
  * Get all the users: 						GET URL/users/
  * Get a specific user with his id:			GET URL/users/{id}
  * Delete a specific user with his id:		DELETE URL/users/{id}
- * Add an user writing all the attributes:	POST 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password'
- * Update an user with all attributes:		PUT 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password'
+ * Add a user writing all the attributes:	POST 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
+ * Update an user with all attributes:		PUT 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
+ * Bind a skill to a user:					PUT 'URL/users/{userId}/{skillId}'
  * 
  * @author quentin.prigent
  *
@@ -95,13 +96,14 @@ public class UserApiController {
      */
     
     @RequestMapping(value="/", method=RequestMethod.POST)
-    public User create(@RequestParam String firstname, String lastname, String email, String password) {
+    public User create(@RequestParam String firstname, String lastname, String email, String password, Boolean referent) {
         User entity = new User();
 
         entity.setFirstname(firstname);
         entity.setLastname(lastname);
         entity.setEmail(email);
         entity.setPassword(password);
+        entity.setReferent(referent);
 
         this.manager.create(entity);
 
@@ -120,7 +122,7 @@ public class UserApiController {
      */
     
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public User update(HttpServletResponse response, @PathVariable int id, @RequestParam String firstname, String lastname, String email, String password) {
+    public User update(HttpServletResponse response, @PathVariable int id, @RequestParam String firstname, String lastname, String email, String password, Boolean referent) {
     	
     	User entity = this.manager.getById(id);
     	
@@ -134,6 +136,8 @@ public class UserApiController {
         	entity.setEmail(email);
         } if(password != null && !password.equals(entity.getPassword())) {
         	entity.setPassword(password);
+        } if(referent != null && !referent.equals(entity.getReferent())) {
+        	entity.setReferent(referent);
         } else {
             response.setStatus(418);
         } 
@@ -143,7 +147,12 @@ public class UserApiController {
     	return null;
     }
     
-    
+    /**
+     * Bind a skill to a user
+     * @param userId
+     * @param skillId
+     * @return
+     */
     @RequestMapping(value="/{userId}/{skillId}", method=RequestMethod.PUT)
     public List<Skill> addSkill(@PathVariable Integer userId, @PathVariable Integer skillId){
     	User user = this.manager.getById(userId);

@@ -40,8 +40,8 @@ public class SkillApiController {
     @Autowired
     private IBaseManager<SkillType> managerSkillType;
     
-    @Autowired
-    private IBaseManager<User> managerUser;
+//    @Autowired
+//    private IBaseManager<User> managerUser;
     
 
     /**
@@ -145,19 +145,5 @@ public class SkillApiController {
     	}
     	return skills;
     }
-    
-
-    
-    /**
-     * Bind a skill and an user
-     */
-    
-//    @RequestMapping(value = "/{skillId}/{userId}")
-//    public Skill addSkill(@PathVariable Integer skillId, @PathVariable Integer userId) {
-//    	Skill skill = this.manager.getById(skillId);
-//    	User user = this.managerUser.getById(userId);
-//    	skill.
-//    	return skill;
-//    }
 
 }

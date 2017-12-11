@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.Length;
 
 import com.capgemini.capskills.models.base.BaseEntity;
@@ -37,6 +39,9 @@ public class User extends BaseEntity {
 	@Column(length=150, unique=false)
 	@Length(min=8, max=150)	
 	private String password;
+	
+	@NotNull
+	private Boolean referent;
 
 	@OneToMany
 	private List<Skill> skills;
@@ -85,6 +90,14 @@ public class User extends BaseEntity {
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
 	}
+	
+	public Boolean getReferent() {
+		return referent;
+	}
+
+	public void setReferent(Boolean referent) {
+		this.referent = referent;
+	}
 
 	/**
      * Constructors
@@ -94,11 +107,12 @@ public class User extends BaseEntity {
     	
     }
     
-    public User(String firstname, String lastname, String email, String password) {
+    public User(String firstname, String lastname, String email, String password, Boolean referent) {
     	this.firstname = firstname;
     	this.lastname = lastname;
     	this.email = email;
     	this.password = password;
+    	this.referent = referent;
     }
 	
 
@@ -110,7 +124,7 @@ public class User extends BaseEntity {
 	@Override
 	public String toString() {
 		return "User [lastname=" + lastname + ", firstname=" + firstname
-				+ ", email=" + email + ", password=" + password + ", getId()="
+				+ ", email=" + email + ", password=" + password + ", referent=" + referent + ", getId()="
 				+ getId() + "]";
 	}
 
