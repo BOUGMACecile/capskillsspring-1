@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
 import com.capgemini.capskills.models.Grading;
+import com.capgemini.capskills.models.Skill;
+import com.capgemini.capskills.models.User;
 
 /**
  * Implements the following api requests
@@ -38,6 +40,12 @@ public class GradingApiController {
 
 	@Autowired
 	private IBaseManager<Grading> manager;
+	
+	@Autowired
+	private IBaseManager<User> managerUser;
+	
+	@Autowired
+	private IBaseManager<Skill> managerSKill;
 	
 	/**
 	 * Method get all grades
@@ -134,6 +142,37 @@ public class GradingApiController {
         
         return entity;
     }
+
+    /**
+     * Bind a user to a grading system
+     * @param gradingId
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value="/adduser/{gradingId}/{userId}", method=RequestMethod.PUT)
+    public Grading addUser(@PathVariable Integer gradingId, @PathVariable Integer userId) {
+    	Grading grading = this.manager.getById(gradingId);
+    	User user = this.managerUser.getById(userId);
+    	grading.setUser(user);  
+    	this.manager.update(grading);
+    	return grading;
+    }
+    
+    /**
+     * Bind a skill to a grading system
+     * @param gradingId
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value="/addskill/{gradingId}/{skillId}", method=RequestMethod.PUT)
+    public Grading addSkill(@PathVariable Integer gradingId, @PathVariable Integer skillId) {
+    	Grading grading = this.manager.getById(gradingId);
+    	Skill skill = this.managerSKill.getById(skillId);
+    	grading.setSkill(skill);
+    	this.manager.update(grading);
+    	return grading;
+    }
+    
 
 
 //    @RequestMapping(value="/fill", method=RequestMethod.POST)

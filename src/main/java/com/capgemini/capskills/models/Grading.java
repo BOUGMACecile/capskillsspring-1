@@ -16,7 +16,7 @@ import com.capgemini.capskills.models.base.BaseEntity;
 
 @Entity
 @Table(name = "grading", uniqueConstraints = { @UniqueConstraint(columnNames = "user_id"),
-		@UniqueConstraint(columnNames = "skill_id"), @UniqueConstraint(columnNames = "project_id") })
+		@UniqueConstraint(columnNames = "skill_id")/*, @UniqueConstraint(columnNames = "project_id") */})
 public class Grading extends BaseEntity {
 
 	/**
@@ -29,9 +29,9 @@ public class Grading extends BaseEntity {
 	// @Id
 	@ManyToOne
 	private Skill skill;
-	// @Id
-	@ManyToOne(fetch=FetchType.LAZY)
-	private Project project;
+//	// @Id
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	private Project project;
 
 	@Min(0)
 	@Max(5)
@@ -89,13 +89,13 @@ public class Grading extends BaseEntity {
 		this.skill = skill;
 	}
 
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
+//	public Project getProject() {
+//		return project;
+//	}
+//
+//	public void setProject(Project project) {
+//		this.project = project;
+//	}
 	
 	/**
 	 * Constructors
