@@ -19,12 +19,13 @@ import com.capgemini.capskills.models.User;
 
 /**
  * Implements the following api requests
- * Get all the users: 						GET URL/users/
- * Get a specific user with his id:			GET URL/users/{id}
- * Delete a specific user with his id:		DELETE URL/users/{id}
- * Add a user writing all the attributes:	POST 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
- * Update an user with all attributes:		PUT 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
- * Bind a skill to a user:					PUT 'URL/users/{userId}/{skillId}'
+ * Get all the users: 							GET URL/users/
+ * Get a specific user with his id:				GET URL/users/{id}
+ * Display all this skills of a specific user:	GET URL/users/display-skills/{userId}
+ * Delete a specific user with his id:			DELETE URL/users/{id}
+ * Add a user writing all the attributes:		POST 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
+ * Update an user with all attributes:			POST 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
+ * Bind a skill to a user:						POST 'URL/users/{userId}/{skillId}'
  * 
  * @author quentin.prigent
  *
@@ -121,7 +122,7 @@ public class UserApiController {
      * @return
      */
     
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
+    @RequestMapping(value="/{id}", method=RequestMethod.POST)
     public User update(HttpServletResponse response, @PathVariable int id, @RequestParam String firstname, String lastname, String email, String password, Boolean referent) {
     	
     	User entity = this.manager.getById(id);
@@ -153,7 +154,7 @@ public class UserApiController {
      * @param skillId
      * @return
      */
-    @RequestMapping(value="/{userId}/{skillId}", method=RequestMethod.PUT)
+    @RequestMapping(value="/{userId}/{skillId}", method=RequestMethod.POST)
     public List<Skill> addSkill(@PathVariable Integer userId, @PathVariable Integer skillId){
     	User user = this.manager.getById(userId);
     	Skill skill = this.managerSkill.getById(skillId);
@@ -163,6 +164,11 @@ public class UserApiController {
     	return skills;
     }
     
+    /**
+     * Display all the skills of a user
+     * @param userId
+     * @return
+     */
     @RequestMapping(value="/display-skills/{userId}", method=RequestMethod.GET)
     public List<Skill> displaySkill(@PathVariable Integer userId) {
     	User user = this.manager.getById(userId);
