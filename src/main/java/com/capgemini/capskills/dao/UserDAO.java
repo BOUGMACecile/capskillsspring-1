@@ -36,5 +36,9 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
 	public void update(User item) {
 		entityManager.merge(item);
 	}
+	
+	public User getByEmail(String email) {
+		return (User) this.entityManager.createQuery("SELECT u FROM User u WHERE u.email=:email").setParameter("email", email).setMaxResults(1).getSingleResult();
+	}
 
 }

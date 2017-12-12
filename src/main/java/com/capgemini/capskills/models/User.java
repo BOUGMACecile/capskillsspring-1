@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import com.capgemini.capskills.models.base.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -37,11 +38,14 @@ public class User extends BaseEntity {
 	private String email;
 	
 	@Column(length=150, unique=false)
-	@Length(min=8, max=150)	
+	@Length(min=8, max=150)
+	@JsonIgnore()
 	private String password;
 	
 	@NotNull
 	private Boolean referent;
+	
+	private String token;
 
 	@OneToMany
 	private List<Skill> skills;
@@ -126,6 +130,14 @@ public class User extends BaseEntity {
 		return "User [lastname=" + lastname + ", firstname=" + firstname
 				+ ", email=" + email + ", password=" + password + ", referent=" + referent + ", getId()="
 				+ getId() + "]";
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	

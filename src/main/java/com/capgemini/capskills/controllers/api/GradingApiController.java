@@ -19,11 +19,11 @@ import com.capgemini.capskills.models.User;
 
 /**
  * Implements the following api requests
- * Get all the grades: 						GET URL/grading/
+ * Get all grading systems: 				GET URL/grading/
+ * Get a grading system with a specific id:	GET URL/grading/{gradingId}
  * Add a grading system:					POST URL/grading/?collaboratorgrade=collaboratorgrade&targetgrade=targetgrade&actualgrade=actualgrade
- * 
- * Get a specific user with his id:			GET URL/users/{id}
  * Delete a specific user with his id:		DELETE URL/users/{id}
+ * 
  * Add a user writing all the attributes:	POST 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
  * Update an user with all attributes:		POST 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
  * Bind a skill to a user:					POST 'URL/users/{userId}/{skillId}'
@@ -99,14 +99,14 @@ public class GradingApiController {
      */
     
     @RequestMapping(value="/{userId}/{skillId}/", method=RequestMethod.POST)
-    public Grading create(@PathVariable Integer userId, @PathVariable Integer skillId, @RequestParam Integer collaboratorgrade, @RequestParam Integer targetgrade, @RequestParam Integer actualgrade) {
+    public Grading create(@PathVariable Integer userId, @PathVariable Integer skillId, @RequestParam Integer collaboratorgrade, @RequestParam Integer actualgrade, @RequestParam Integer targetgrade) {
     	Grading entity = new Grading();
     	User user = this.managerUser.getById(userId);
     	Skill skill = this.managerSKill.getById(skillId);
     	
         entity.setCollaboratorgrade(collaboratorgrade);
-        entity.setTargetgrade(targetgrade);
         entity.setActualgrade(actualgrade);
+        entity.setTargetgrade(targetgrade);
         entity.setUser(user);
         entity.setSkill(skill);
 
@@ -123,58 +123,58 @@ public class GradingApiController {
      * @param collaboratorgrade
      * @return
      */
-
-    @RequestMapping(value="/{id}", method=RequestMethod.POST)
-    public Grading updateCollaboratorGrade(HttpServletResponse response, @PathVariable Integer id, @RequestParam Integer collaboratorgrade, @RequestParam Integer actualgrade, @RequestParam Integer targetgrade) {
-    	Grading entity = this.manager.getById(id);
-
-        if (entity == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        } if(collaboratorgrade != null && !collaboratorgrade.equals(entity.getCollaboratorgrade())) {
-            entity.setCollaboratorgrade(collaboratorgrade);
-        } if(actualgrade != null && !actualgrade.equals(entity.getActualgrade())) {
-        	entity.setActualgrade(actualgrade);
-        } if(targetgrade != null && !targetgrade.equals(entity.getTargetgrade())) {
-        	entity.setTargetgrade(targetgrade);
-        } else {
-            response.setStatus(418);
-        }
-
-        this.manager.update(entity);
-        
-        return entity;
-    }
-
-    /**
-     * Bind a user to a grading system
-     * @param gradingId
-     * @param userId
-     * @return
-     */
-    @RequestMapping(value="/adduser/{gradingId}/{userId}", method=RequestMethod.POST)
-    public Grading addUser(@PathVariable Integer gradingId, @PathVariable Integer userId) {
-    	Grading grading = this.manager.getById(gradingId);
-    	User user = this.managerUser.getById(userId);
-    	grading.setUser(user);  
-    	this.manager.update(grading);
-    	return grading;
-    }
     
-    /**
-     * Bind a skill to a grading system
-     * @param gradingId
-     * @param userId
-     * @return
-     */
-    @RequestMapping(value="/addskill/{gradingId}/{skillId}", method=RequestMethod.POST)
-    public Grading addSkill(@PathVariable Integer gradingId, @PathVariable Integer skillId) {
-    	Grading grading = this.manager.getById(gradingId);
-    	Skill skill = this.managerSKill.getById(skillId);
-    	grading.setSkill(skill);
-    	this.manager.update(grading);
-    	return grading;
-    }
-    
+//    @RequestMapping(value="/{id}", method=RequestMethod.POST)
+//    public Grading updateCollaboratorGrade(HttpServletResponse response, @PathVariable Integer id, @RequestParam Integer collaboratorgrade, @RequestParam Integer actualgrade, @RequestParam Integer targetgrade) {
+//    	Grading entity = this.manager.getById(id);
+//
+//        if (entity == null) {
+//            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+//        } if(collaboratorgrade != null && !collaboratorgrade.equals(entity.getCollaboratorgrade())) {
+//            entity.setCollaboratorgrade(collaboratorgrade);
+//        } if(actualgrade != null && !actualgrade.equals(entity.getActualgrade())) {
+//        	entity.setActualgrade(actualgrade);
+//        } if(targetgrade != null && !targetgrade.equals(entity.getTargetgrade())) {
+//        	entity.setTargetgrade(targetgrade);
+//        } else {
+//            response.setStatus(418);
+//        }
+//
+//        this.manager.update(entity);
+//        
+//        return entity;
+//    }
+//
+//    /**
+//     * Bind a user to a grading system
+//     * @param gradingId
+//     * @param userId
+//     * @return
+//     */
+//    @RequestMapping(value="/adduser/{gradingId}/{userId}", method=RequestMethod.POST)
+//    public Grading addUser(@PathVariable Integer gradingId, @PathVariable Integer userId) {
+//    	Grading grading = this.manager.getById(gradingId);
+//    	User user = this.managerUser.getById(userId);
+//    	grading.setUser(user);  
+//    	this.manager.update(grading);
+//    	return grading;
+//    }
+//    
+//    /**
+//     * Bind a skill to a grading system
+//     * @param gradingId
+//     * @param userId
+//     * @return
+//     */
+//    @RequestMapping(value="/addskill/{gradingId}/{skillId}", method=RequestMethod.POST)
+//    public Grading addSkill(@PathVariable Integer gradingId, @PathVariable Integer skillId) {
+//    	Grading grading = this.manager.getById(gradingId);
+//    	Skill skill = this.managerSKill.getById(skillId);
+//    	grading.setSkill(skill);
+//    	this.manager.update(grading);
+//    	return grading;
+//    }
+//
 
 
 //    @RequestMapping(value="/fill", method=RequestMethod.POST)
