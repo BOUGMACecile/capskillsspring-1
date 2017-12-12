@@ -163,95 +163,10 @@ public class UserApiController {
     	return skills;
     }
     
-    /**
-     * This method binds a skill to a user
-     * @param response
-     * @param skillTypeId
-     * @param skillName
-     * @return
-     */
-//    @RequestMapping(value="/{userId}/skillname", method=RequestMethod.POST)
-//    public User createSkill(HttpServletResponse response, @PathVariable int userId, @RequestParam(value = "skillname") String skillName) {
-//    	User entity = this.manager.getById(userId);
-//
-//        if (entity == null) {
-//            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-//        } else if(skillName != null ) {
-//            entity.addSkill(new Skill(skillName));
-//            this.manager.create(entity);
-//           
-//        } else {
-//            response.setStatus(418);
-//        }
-//        return entity;
-//    }
-
-//    @RequestMapping(value="/{userId}/{skillId}", method=RequestMethod.POST)
-//    public void addSkill(HttpServletResponse response, @PathVariable int userId, int skillId) {
-//    	User entity = this.manager.getById(userId);
-//    	Skill skill = this.managerSkill.getById(skillId);
-//    	
-//    	if (entity == null || skill == null) {
-//    		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-//    	} else if (entity != null && skill != null) {
-//    		entity.addSkill(skill);
-//    	} else {
-//    		response.setStatus(418);
-//    	}
-//    }
-  
-/**************************************************************************************************/    
-    
-    /**
-     * This method deletes a skill from an user
-     * @param skillTypeId
-     * @param skillId
-     * @return
-     */
-//    @RequestMapping(value = "/{userId}/skills/{skillId}", method = RequestMethod.DELETE)
-//    public User deleteSkill(@PathVariable Integer userId, @PathVariable Integer skillId) {
-//        User type = this.manager.getById(userId);
-//      
-//        if (type != null) {
-//        	//on parcoure la liste des skillType afin de retrouver le skill que l'on doit supprimer
-//        	Iterator<Skill> iterator = type.getSkills().iterator();
-//        	//on intialise un bouleen find à false, sa valeur sera à true trouve si l'on trouve lélément à supprimer
-//        	boolean find = false;
-//        	Skill skill = null;
-//    		while (iterator.hasNext() && find==false) {
-//    			skill=iterator.next();
-////    			if(skill.getId() == skillId) {
-//    			if(skill.getId().equals(skillId)) {
-//    				find=true;
-//    			}
-//    		}
-//    		if(find == true)
-//    			{
-//    			//suppression du skill dans l'objet de persistance
-//    			type.removeSkill(skill);  		
-//    			//MAJ de la BDD
-//    			this.manager.update(type);
-//    			}
-//        }
-//        
-//        return type;
-//    }
-//
-//    /**
-//     * Display the skills of an user
-//     * @param response
-//     * @param skillTypeId
-//     * @return
-//     */
-//  	@RequestMapping(value="/{userId}/skills", method=RequestMethod.GET)
-//  	public List<Skill> showUserSkills(HttpServletResponse response, @PathVariable int userId) {
-//  		User entity = this.manager.getById(userId);
-//  		List<Skill> skills = new ArrayList<Skill>();
-//  		if (entity== null) {
-//  			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-//  		} else {
-//  			skills = entity.getSkills();
-//  		}
-//  		return skills;
-//  	}
+    @RequestMapping(value="/display-skills/{userId}", method=RequestMethod.GET)
+    public List<Skill> displaySkill(@PathVariable Integer userId) {
+    	User user = this.manager.getById(userId);
+    	List<Skill> skills = user.getSkills();
+    	return skills;
+    }
 }
