@@ -39,7 +39,7 @@ public class ProjectApiController {
 
 
 //Afficher les informations concernant un projet
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)// on définit la structure de l'url
 	public Project get(@PathVariable Integer id, HttpServletResponse response) {
 		Project entity = this.manager.getById(id);
 
