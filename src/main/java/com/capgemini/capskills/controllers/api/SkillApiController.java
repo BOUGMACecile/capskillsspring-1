@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +32,7 @@ import com.capgemini.capskills.models.User;
  */
 
 @RestController
+
 @RequestMapping("/skills")
 public class SkillApiController {
 
@@ -52,13 +54,14 @@ public class SkillApiController {
     public List<Skill> getAll() {
         return this.manager.getAll();
     }   
-
+    
     /**
      * Get a skill with a specific id
      * @param id
      * @param response
      * @return
      */
+    @CrossOrigin(origins = "*")
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public Skill get(@PathVariable Integer id, HttpServletResponse response)  {
         Skill entity = this.manager.getById(id);      
@@ -133,6 +136,7 @@ public class SkillApiController {
      * @param skillTypeId
      * @return
      */
+    @CrossOrigin(origins = "*")
     @RequestMapping(value="/display/{skillTypeId}", method=RequestMethod.GET)
     public List<Skill> getAllById(@PathVariable Integer skillTypeId) {
     	List<Skill> unselectedSkills = this.manager.getAll();
@@ -145,5 +149,6 @@ public class SkillApiController {
     	}
     	return skills;
     }
+    
 
 }
