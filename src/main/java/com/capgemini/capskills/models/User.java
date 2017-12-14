@@ -48,6 +48,7 @@ public class User extends BaseEntity {
 	private String token;
 
 	@OneToMany
+	@JsonIgnore()
 	private List<Skill> skills;
 	
 	/**

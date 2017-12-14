@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capgemini.capskills.managers.UserManager;
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
 import com.capgemini.capskills.models.Grading;
 import com.capgemini.capskills.models.Skill;
@@ -40,7 +41,7 @@ public class GradingApiController {
 	private IBaseManager<Grading> manager;
 	
 	@Autowired
-	private IBaseManager<User> managerUser;
+	private UserManager managerUser;
 	
 	@Autowired
 	private IBaseManager<Skill> managerSKill;
@@ -98,7 +99,7 @@ public class GradingApiController {
      * @return
      */
     
-    @RequestMapping(value="/{userId}/{skillId}/", method=RequestMethod.POST)
+    @RequestMapping(value="/addgrade/{userId}/{skillId}/", method=RequestMethod.POST)
     public Grading create(@PathVariable Integer userId, @PathVariable Integer skillId, @RequestParam Integer collaboratorgrade, @RequestParam Integer actualgrade, @RequestParam Integer targetgrade) {
     	Grading entity = new Grading();
     	User user = this.managerUser.getById(userId);

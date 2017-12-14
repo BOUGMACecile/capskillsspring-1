@@ -57,8 +57,13 @@ public class CapskillsApplication {
 	}
 
 	
+//	@Bean
+//	public IBaseManager<User> getUserManager(){
+//		return new UserManager();
+//	}
+	
 	@Bean
-	public IBaseManager<User> getUserManager(){
+	public UserManager getUserManager(){
 		return new UserManager();
 	}
 	
