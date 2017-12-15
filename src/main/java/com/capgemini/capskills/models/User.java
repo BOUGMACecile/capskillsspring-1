@@ -45,10 +45,10 @@ public class User extends BaseEntity {
 	@NotNull
 	private Boolean referent;
 	
+	@JsonIgnore()
 	private String token;
 
 	@OneToMany
-	@JsonIgnore()
 	private List<Skill> skills;
 	
 	/**
