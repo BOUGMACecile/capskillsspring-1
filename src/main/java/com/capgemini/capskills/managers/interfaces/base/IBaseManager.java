@@ -2,11 +2,10 @@ package com.capgemini.capskills.managers.interfaces.base;
 
 import java.util.List;
 
-import com.capgemini.capskills.models.Project;
-import com.capgemini.capskills.models.Skill;
 import com.capgemini.capskills.models.base.BaseEntity;
 
 public interface IBaseManager<T extends BaseEntity> {
+	
 	public void create(T item);
 
 	public void delete(T item);
@@ -16,5 +15,6 @@ public interface IBaseManager<T extends BaseEntity> {
 	public T getById(Integer id);
 
 	public void update(T item);
+	
 	//public List<Skill> getAll();
 }

@@ -2,6 +2,8 @@ package com.capgemini.capskills.dao.interfaces.base;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Service;
 
 import com.capgemini.capskills.models.base.BaseEntity;
@@ -17,4 +19,6 @@ public abstract interface IBaseDAO<T extends BaseEntity> {
 	public T getById(Integer id);
 
 	public void update(T item);
+	
+	public Query createQuery(String qlString);
 }

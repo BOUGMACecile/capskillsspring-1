@@ -1,11 +1,9 @@
-package com.capgemini.capskills.controllers;
+package com.capgemini.capskills.controllers.api;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
 import com.capgemini.capskills.models.Project;
 import com.capgemini.capskills.models.Skill;
-import com.capgemini.capskills.models.SkillType;
 
 @RestController
 @RequestMapping("/projects")
@@ -39,7 +36,7 @@ public class ProjectApiController {
 
 
 //Afficher les informations concernant un projet
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)// on définit la structure de l'url
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public Project get(@PathVariable Integer id, HttpServletResponse response) {
 		Project entity = this.manager.getById(id);
 

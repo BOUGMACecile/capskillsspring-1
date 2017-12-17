@@ -7,34 +7,35 @@ import javax.persistence.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.capskills.dao.base.BaseDAO;
-import com.capgemini.capskills.dao.interfaces.ISkillDAO;
-import com.capgemini.capskills.models.Skill;
+import com.capgemini.capskills.dao.interfaces.IGradingDAO;
+import com.capgemini.capskills.models.Grading;
 
 @Transactional
-public class SkillDAO extends BaseDAO<Skill> implements ISkillDAO {
+public class GradingDAO extends BaseDAO<Grading> implements IGradingDAO{
+
 	@Override
-	public void create(Skill item) {
+	public void create(Grading item) {
 		entityManager.persist(item);
 	}
 
 	@Override
-	public void delete(Skill item) {
+	public void delete(Grading item) {
 		entityManager.detach(item);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Skill> getAll() {
-		return entityManager.createQuery("SELECT s FROM Skill s").getResultList();
+	public List<Grading> getAll() {
+				return entityManager.createQuery("SELECT g FROM Grading g").getResultList();
 	}
 
 	@Override
-	public Skill getById(Integer id) {
-		return entityManager.find(Skill.class, id);
+	public Grading getById(Integer id) {
+		return entityManager.find(Grading.class, id);
 	}
 
 	@Override
-	public void update(Skill item) {
+	public void update(Grading item) {
 		entityManager.merge(item);
 	}
 
