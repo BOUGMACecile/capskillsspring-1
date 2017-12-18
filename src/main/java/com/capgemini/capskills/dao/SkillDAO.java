@@ -2,6 +2,8 @@ package com.capgemini.capskills.dao;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.capskills.dao.base.BaseDAO;
@@ -34,6 +36,12 @@ public class SkillDAO extends BaseDAO<Skill> implements ISkillDAO {
 	@Override
 	public void update(Skill item) {
 		entityManager.merge(item);
+	}
+
+	@Override
+	public Query createQuery(String qlString) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

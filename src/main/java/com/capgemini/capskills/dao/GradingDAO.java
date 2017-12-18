@@ -2,6 +2,9 @@ package com.capgemini.capskills.dao;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.capskills.dao.base.BaseDAO;
@@ -35,6 +38,13 @@ public class GradingDAO extends BaseDAO<Grading> implements IGradingDAO{
 	@Override
 	public void update(Grading item) {
 		entityManager.merge(item);
+	}
+
+
+	@Override
+	public Query createQuery(String qlString) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

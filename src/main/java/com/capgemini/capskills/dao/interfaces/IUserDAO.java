@@ -7,4 +7,7 @@ import com.capgemini.capskills.models.User;
 
 @Repository
 public interface IUserDAO extends IBaseDAO<User> {
+
+	public User getByEmail(String email);
+
 }
