@@ -56,9 +56,8 @@ public class CapskillsApplication {
 		return new GradingDAO();
 	}
 
-
 	@Bean
-	public UserManager getUserManager() {
+	public UserManager getUserManager(){
 		return new UserManager();
 	}
 

@@ -1,18 +1,18 @@
 package com.capgemini.capskills.controllers.api;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capgemini.capskills.managers.UserManager;
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
 import com.capgemini.capskills.models.Skill;
 import com.capgemini.capskills.models.User;
@@ -37,7 +37,7 @@ import com.capgemini.capskills.models.User;
 public class UserApiController {
 
 	@Autowired
-	private IBaseManager<User> manager;
+	private UserManager manager;
 	
 	@Autowired
 	private IBaseManager<Skill> managerSkill;
@@ -174,5 +174,18 @@ public class UserApiController {
     	User user = this.manager.getById(userId);
     	List<Skill> skills = user.getSkills();
     	return skills;
+    }
+    
+    @GetMapping("/login")
+    public User connectionAction(HttpServletResponse response, @RequestParam String email, @RequestParam String password) {
+    	User user = this.manager.getByEmail(email);
+    	
+    	// TODO Add security.
+    	if (user == null || user.getPassword() == null || !user.getPassword().equals(password)) {
+    		response.setStatus(500);
+    		return null;
+    	}
+    	
+    	return user;
     }
 }
