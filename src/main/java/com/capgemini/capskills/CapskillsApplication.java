@@ -56,12 +56,12 @@ public class CapskillsApplication {
 		return new GradingDAO();
 	}
 
-	
+
 	@Bean
-	public IBaseManager<User> getUserManager(){
+	public UserManager getUserManager() {
 		return new UserManager();
 	}
-	
+
 	@Bean
 	public IBaseDAO<User> getUserDAO() {
 		return new UserDAO();
