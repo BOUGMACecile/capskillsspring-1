@@ -1,7 +1,14 @@
 package com.capgemini.capskills.controllers.api;
  
 import java.util.ArrayList;
+
 import java.util.List;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,6 +156,32 @@ public class SkillApiController {
     	}
     	return skills;
     }
-    
+
+    /**
+     * Add automatically all the skills
+     * @return
+     */
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value="/fill", method=RequestMethod.POST)
+    public List<Skill> fill() {
+    	Map<Skill, Integer> skills = new HashMap<>();
+    	skills.put(new Skill("J2EE"),1);
+    	skills.put(new Skill("Angular"),1);
+    	skills.put(new Skill("PHP"),1);
+    	skills.put(new Skill("MySql"),3);
+    	skills.put(new Skill("Oracle"),3);
+    	skills.put(new Skill("GIT"),5);
+    	skills.put(new Skill("Eclipse"),5);
+    	skills.put(new Skill("Trello"),5);
+    	
+    	for (Map.Entry<Skill,Integer> entry : skills.entrySet()) {
+    		
+    		SkillType skillType = this.managerSkillType.getById(entry.getValue());         
+    		entry.getKey().setSkillType(skillType);
+            this.manager.create(entry.getKey());
+    	}   
+        return this.getAll();
+    }
+
 
 }

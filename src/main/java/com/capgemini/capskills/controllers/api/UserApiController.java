@@ -1,17 +1,26 @@
 package com.capgemini.capskills.controllers.api;
 
 import java.util.ArrayList;
+
 import java.util.Iterator;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+
+import com.capgemini.capskills.managers.UserManager;
 
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
 import com.capgemini.capskills.models.Skill;
@@ -19,12 +28,22 @@ import com.capgemini.capskills.models.User;
 
 /**
  * Implements the following api requests
+<<<<<<< HEAD
  * Get all the users: 						GET URL/users/
  * Get a specific user with his id:			GET URL/users/{id}
  * Delete a specific user with his id:		DELETE URL/users/{id}
  * Add a user writing all the attributes:	POST 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
  * Update an user with all attributes:		PUT 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
  * Bind a skill to a user:					PUT 'URL/users/{userId}/{skillId}'
+=======
+ * Get all the users: 							GET URL/users/
+ * Get a specific user with his id:				GET URL/users/{id}
+ * Display all this skills of a specific user:	GET URL/users/display-skills/{userId}
+ * Delete a specific user with his id:			DELETE URL/users/{id}
+ * Add a user writing all the attributes:		POST 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
+ * Update an user with all attributes:			POST 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
+ * Bind a skill to a user:						POST 'URL/users/{userId}/{skillId}'
+>>>>>>> cecile
  * 
  * @author quentin.prigent
  *
@@ -36,7 +55,9 @@ import com.capgemini.capskills.models.User;
 public class UserApiController {
 
 	@Autowired
-	private IBaseManager<User> manager;
+
+	private UserManager manager;
+
 	
 	@Autowired
 	private IBaseManager<Skill> managerSkill;
@@ -121,7 +142,8 @@ public class UserApiController {
      * @return
      */
     
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
+
+    @RequestMapping(value="/{id}", method=RequestMethod.POST)
     public User update(HttpServletResponse response, @PathVariable int id, @RequestParam String firstname, String lastname, String email, String password, Boolean referent) {
     	
     	User entity = this.manager.getById(id);
@@ -153,7 +175,9 @@ public class UserApiController {
      * @param skillId
      * @return
      */
-    @RequestMapping(value="/{userId}/{skillId}", method=RequestMethod.PUT)
+
+
+    @RequestMapping(value="/{userId}/{skillId}", method=RequestMethod.POST)
     public List<Skill> addSkill(@PathVariable Integer userId, @PathVariable Integer skillId){
     	User user = this.manager.getById(userId);
     	Skill skill = this.managerSkill.getById(skillId);
@@ -164,6 +188,7 @@ public class UserApiController {
     }
     
     /**
+<<<<<<< HEAD
      * This method binds a skill to a user
      * @param response
      * @param skillTypeId
@@ -256,3 +281,45 @@ public class UserApiController {
 //  	}
     
 }
+
+     * Display all the skills of a user
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value="/display-skills/{userId}", method=RequestMethod.GET)
+    public List<Skill> displaySkill(@PathVariable Integer userId) {
+    	User user = this.manager.getById(userId);
+    	List<Skill> skills = user.getSkills();
+    	return skills;
+    }
+    
+    @GetMapping("/login")
+    public User connectionAction(HttpServletResponse response, @RequestParam String email, @RequestParam String password) {
+    	User user = this.manager.getByEmail(email);
+    	
+    	// TODO Add security.
+    	if (user == null || user.getPassword() == null || !user.getPassword().equals(password)) {
+    		response.setStatus(500);
+    		return null;
+    	}
+    	
+    	return user;
+    }
+    
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value="/fill", method=RequestMethod.POST)
+    public List<User> fill() {
+    	
+    	List<User> users = new ArrayList<User>();
+    	
+    	users.add(new User("collab1", "collab1", "collab1@capgemini.com", "collab1234", false));
+    	users.add(new User("collab2", "collab2", "collab2@capgemini.com", "collab1234", false));
+    	users.add(new User("collab3", "collab3", "collab3@capgemini.com", "collab1234", true));
+    	
+    	for (User user:users) {
+            this.manager.create(user);
+    	}   
+        return this.getAll();
+    }
+}
+

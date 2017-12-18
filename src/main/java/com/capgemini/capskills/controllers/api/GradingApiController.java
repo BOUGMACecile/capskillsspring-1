@@ -186,14 +186,16 @@ public class GradingApiController {
 //
 //        return this.getAll();
 //    }
+
     @CrossOrigin(origins = "*")
     @RequestMapping(value="/addGrading", method=RequestMethod.POST)
-    public Grading createGrading(@RequestParam Integer collaboratorgrade, @RequestParam Integer targetgrade, @RequestParam Integer actualgrade, @RequestParam Integer userId, @RequestParam Integer skillId) {
+    public Grading createGrading(@RequestParam Integer actualgrade, @RequestParam Integer userId, @RequestParam Integer skillId) {
     	Grading entity = new Grading();
     	Skill skill = this.managerSKill.getById(skillId);
     	User user = this.managerUser.getById(userId);
-        entity.setCollaboratorgrade(collaboratorgrade);
-        entity.setTargetgrade(targetgrade);
+        entity.setCollaboratorgrade(0);
+        entity.setTargetgrade(0);
+
         entity.setActualgrade(actualgrade);
         entity.setSkill(skill);
         entity.setUser(user);

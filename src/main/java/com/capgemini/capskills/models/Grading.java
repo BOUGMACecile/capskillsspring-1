@@ -3,6 +3,7 @@ package com.capgemini.capskills.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -14,9 +15,12 @@ import javax.validation.constraints.Min;
 
 import com.capgemini.capskills.models.base.BaseEntity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-@Table(name = "grading", uniqueConstraints = { @UniqueConstraint(columnNames = "user_id"),
-		@UniqueConstraint(columnNames = "skill_id")/*, @UniqueConstraint(columnNames = "project_id") */})
+@Table(name = "grading", uniqueConstraints = { @UniqueConstraint(columnNames = "id"),
+/*@UniqueConstraint(columnNames = "skill_id")*//*, @UniqueConstraint(columnNames = "project_id") */})
+
 public class Grading extends BaseEntity {
 
 	/**
@@ -25,6 +29,10 @@ public class Grading extends BaseEntity {
 	
 	// @Id
 	@ManyToOne
+
+	@JoinColumn(name = "user_id")
+	@JsonManagedReference
+
 	private User user;
 	// @Id
 	@ManyToOne

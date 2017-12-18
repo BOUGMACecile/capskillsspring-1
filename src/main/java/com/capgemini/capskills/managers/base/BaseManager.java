@@ -39,4 +39,9 @@ public abstract class BaseManager<T extends BaseEntity> implements IBaseManager<
 	public void update(T item) {
 		dao.update(item);
 	}
+	/** Gets the dao. */
+	protected IBaseDAO<T> getDao() {
+		return this.dao;
+	}
 }
+

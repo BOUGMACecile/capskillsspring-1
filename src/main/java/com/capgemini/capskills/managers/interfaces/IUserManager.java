@@ -5,4 +5,5 @@ import com.capgemini.capskills.models.User;
 
 public interface IUserManager extends IBaseManager<User> {
 
+
 }
