@@ -6,7 +6,6 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Service;
 
-import com.capgemini.capskills.models.Grading;
 import com.capgemini.capskills.models.base.BaseEntity;
 
 @Service

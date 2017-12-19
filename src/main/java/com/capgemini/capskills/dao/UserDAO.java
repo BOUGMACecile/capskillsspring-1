@@ -2,9 +2,7 @@ package com.capgemini.capskills.dao;
 
 import java.util.List;
 
-
 import javax.persistence.Query;
-
 
 import org.springframework.transaction.annotation.Transactional;
 

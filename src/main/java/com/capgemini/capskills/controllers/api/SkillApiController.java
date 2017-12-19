@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
 import com.capgemini.capskills.models.Skill;
 import com.capgemini.capskills.models.SkillType;
-import com.capgemini.capskills.models.User;
 
 /**
  * Implements the following api requests

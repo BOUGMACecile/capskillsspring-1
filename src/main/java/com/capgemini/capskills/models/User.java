@@ -1,12 +1,7 @@
 package com.capgemini.capskills.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -47,9 +42,6 @@ public class User extends BaseEntity {
 	
 	@JsonIgnore()
 	private String token;
-
-	@OneToMany
-	private List<Skill> skills;
 	
 	/**
 	 * Getters and Setters
@@ -86,14 +78,6 @@ public class User extends BaseEntity {
 	
 	public void setPassword(String password) {
 		this.password = password;
-	}
-    
-    public List<Skill> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
 	}
 	
 	public Boolean getReferent() {

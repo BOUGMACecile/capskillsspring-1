@@ -1,18 +1,13 @@
 package com.capgemini.capskills.models;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.capgemini.capskills.models.base.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -35,17 +30,6 @@ public class Skill extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "skill_type_id")
 	private SkillType skillType;
-
-
-//	@ManyToMany
-//	@JoinColumn(name = "user_id")
-//	private User user;
-	
-//	@ManyToMany(mappedBy = "skills")
-//	private List<Project> projects;
-//	
-//	@ManyToMany
-//	private List<User> users;
 	
 
 	/**

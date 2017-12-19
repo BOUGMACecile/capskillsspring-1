@@ -1,6 +1,5 @@
 package com.capgemini.capskills.controllers.api;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capgemini.capskills.managers.GradingManager;
 import com.capgemini.capskills.managers.base.UserManager;
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
 import com.capgemini.capskills.models.Grading;
@@ -22,14 +20,7 @@ import com.capgemini.capskills.models.User;
 
 /**
  * Implements the following api requests
-<<<<<<< HEAD
- * Get all grading systems: 				GET URL/grading/
- * Get a grading system with a specific id:	GET URL/grading/{gradingId}
-=======
  * Get all the grades: 						GET URL/grading/
- * 
- * 
->>>>>>> 29c0f3ed7a0062e041d4356a0a66a11eccaa4eaa
  * Add a grading system:					POST URL/grading/?collaboratorgrade=collaboratorgrade&targetgrade=targetgrade&actualgrade=actualgrade
  * Delete a specific user with his id:		DELETE URL/users/{id}
  * 
@@ -37,7 +28,6 @@ import com.capgemini.capskills.models.User;
  * Update an user with all attributes:		PUT 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
  * Bind a skill to a user:					PUT 'URL/users/{userId}/{skillId}'
  * 
- * @author quentin.prigent
  *
  */
 
@@ -55,9 +45,6 @@ public class GradingApiController {
 	@Autowired
 	private IBaseManager<Skill> managerSKill;
 	
-	
-	@Autowired
-	private GradingManager managerGranding;
 	/**
 	 * Method get all grades
 	 * @return

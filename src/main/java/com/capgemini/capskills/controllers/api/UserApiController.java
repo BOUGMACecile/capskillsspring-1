@@ -1,7 +1,6 @@
 package com.capgemini.capskills.controllers.api;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capskills.managers.base.UserManager;
-import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
-import com.capgemini.capskills.models.Skill;
 import com.capgemini.capskills.models.User;
 
 /**
@@ -50,10 +47,6 @@ public class UserApiController {
 
 	@Autowired
 	private UserManager manager;
-
-	
-	@Autowired
-	private IBaseManager<Skill> managerSkill;
 	
 	/**
 	 * Method get all users
@@ -161,36 +154,7 @@ public class UserApiController {
     	
     	return null;
     }
-    
-    /**
-     * Bind a skill to a user
-     * @param userId
-     * @param skillId
-     * @return
-     */
 
-
-    @RequestMapping(value="/{userId}/{skillId}", method=RequestMethod.POST)
-    public List<Skill> addSkill(@PathVariable Integer userId, @PathVariable Integer skillId){
-    	User user = this.manager.getById(userId);
-    	Skill skill = this.managerSkill.getById(skillId);
-    	List<Skill> skills = user.getSkills(); 
-    	skills.add(skill);
-    	this.manager.update(user);
-    	return skills;
-    }
-
-	/**
-     * Display all the skills of a user
-     * @param userId
-     * @return
-     */
-    @RequestMapping(value="/display-skills/{userId}", method=RequestMethod.GET)
-    public List<Skill> displaySkill(@PathVariable Integer userId) {
-    	User user = this.manager.getById(userId);
-    	List<Skill> skills = user.getSkills();
-    	return skills;
-    }
     
     @GetMapping("/login")
     public User connectionAction(HttpServletResponse response, @RequestParam String email, @RequestParam String password) {
