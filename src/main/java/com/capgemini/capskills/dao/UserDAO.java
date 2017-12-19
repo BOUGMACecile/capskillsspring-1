@@ -48,8 +48,7 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
 
 	@Override
 	public Query createQuery(String qlString) {
-		// TODO Auto-generated method stub
-		return null;
+		 return this.entityManager.createQuery(qlString);
 	}
 
 	@Override
