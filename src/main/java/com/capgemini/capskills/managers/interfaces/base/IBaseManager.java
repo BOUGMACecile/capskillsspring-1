@@ -16,5 +16,9 @@ public interface IBaseManager<T extends BaseEntity> {
 
 	public void update(T item);
 	
+	
+	//public List<T> createQuery(String query);
 	//public List<Skill> getAll();
+	
+	public List<T> select(String query);
 }

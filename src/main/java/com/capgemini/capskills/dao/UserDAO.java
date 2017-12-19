@@ -52,4 +52,10 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
 		return null;
 	}
 
+	@Override
+	public List<User> select(String query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

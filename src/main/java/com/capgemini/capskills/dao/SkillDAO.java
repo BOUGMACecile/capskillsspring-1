@@ -44,4 +44,10 @@ public class SkillDAO extends BaseDAO<Skill> implements ISkillDAO {
 		return null;
 	}
 
+	@Override
+	public List<Skill> select(String query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
