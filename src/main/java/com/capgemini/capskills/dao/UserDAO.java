@@ -40,4 +40,11 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
 	public void update(User item) {
 		entityManager.merge(item);
 	}
+
+	@Override
+	public User getByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

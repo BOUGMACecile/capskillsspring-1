@@ -182,70 +182,7 @@ public class GradingApiController {
     	this.manager.update(grading);
     	return grading;
     }
-
-    
-//    @RequestMapping(value="/{id}", method=RequestMethod.POST)
-//    public Grading updateCollaboratorGrade(HttpServletResponse response, @PathVariable Integer id, @RequestParam Integer collaboratorgrade, @RequestParam Integer actualgrade, @RequestParam Integer targetgrade) {
-//    	Grading entity = this.manager.getById(id);
-//
-//        if (entity == null) {
-//            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-//        } if(collaboratorgrade != null && !collaboratorgrade.equals(entity.getCollaboratorgrade())) {
-//            entity.setCollaboratorgrade(collaboratorgrade);
-//        } if(actualgrade != null && !actualgrade.equals(entity.getActualgrade())) {
-//        	entity.setActualgrade(actualgrade);
-//        } if(targetgrade != null && !targetgrade.equals(entity.getTargetgrade())) {
-//        	entity.setTargetgrade(targetgrade);
-//        } else {
-//            response.setStatus(418);
-//        }
-//
-//        this.manager.update(entity);
-//        
-//        return entity;
-//    }
-//
-//    /**
-//     * Bind a user to a grading system
-//     * @param gradingId
-//     * @param userId
-//     * @return
-//     */
-//    @RequestMapping(value="/adduser/{gradingId}/{userId}", method=RequestMethod.POST)
-//    public Grading addUser(@PathVariable Integer gradingId, @PathVariable Integer userId) {
-//    	Grading grading = this.manager.getById(gradingId);
-//    	User user = this.managerUser.getById(userId);
-//    	grading.setUser(user);  
-//    	this.manager.update(grading);
-//    	return grading;
-//    }
-//    
-//    /**
-//     * Bind a skill to a grading system
-//     * @param gradingId
-//     * @param userId
-//     * @return
-//     */
-//    @RequestMapping(value="/addskill/{gradingId}/{skillId}", method=RequestMethod.POST)
-//    public Grading addSkill(@PathVariable Integer gradingId, @PathVariable Integer skillId) {
-//    	Grading grading = this.manager.getById(gradingId);
-//    	Skill skill = this.managerSKill.getById(skillId);
-//    	grading.setSkill(skill);
-//    	this.manager.update(grading);
-//    	return grading;
-//    }
-//
-
-
-//    @RequestMapping(value="/fill", method=RequestMethod.POST)
-//    public List<Grading> fill() {
-//        for (Integer collaboratorgrade : Arrays.asList(3, 4, 5, 6, 7)) {
-//        	Grading type = new Grading(collaboratorgrade);
-//            this.manager.create(type);
-//        }
-//
-//        return this.getAll();
-//    }
+   
 
     @CrossOrigin(origins = "*")
     @RequestMapping(value="/addGrading", method=RequestMethod.POST)
