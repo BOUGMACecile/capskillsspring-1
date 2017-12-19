@@ -1,7 +1,11 @@
 package com.capgemini.capskills.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -43,11 +47,33 @@ public class User extends BaseEntity {
 	@JsonIgnore()
 	private String token;
 	
+	@OneToMany
+	private List<User> collaborators;
+	
+	@ManyToOne
+	private User careerManager;
+	
 	/**
 	 * Getters and Setters
 	 * @return
 	 */
 	
+	public List<User> getCollaborators() {
+		return collaborators;
+	}
+
+	public void setCollaborators(List<User> collaborators) {
+		this.collaborators = collaborators;
+	}
+	
+	public User getCareerManager() {
+		return careerManager;
+	}
+	
+	public void setCareerManager(User careerManager) {
+		this.careerManager = careerManager;
+	}
+
 	public String getFirstname() {
 		return firstname;
 	}

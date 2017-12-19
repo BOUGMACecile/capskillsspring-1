@@ -24,10 +24,8 @@ public class Grading extends BaseEntity {
 	
 	// @Id
 	@ManyToOne
-
 	@JoinColumn(name = "user_id")
 	@JsonManagedReference
-
 	private User user;
 	// @Id
 	@ManyToOne
