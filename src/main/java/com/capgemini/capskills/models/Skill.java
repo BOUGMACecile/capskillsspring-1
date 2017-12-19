@@ -80,7 +80,7 @@ public class Skill extends BaseEntity {
 	public Skill(String name) {
 	super();
 	this.name = name;
-}
+	}
 
 	
 
