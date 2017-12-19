@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
 import com.capgemini.capskills.models.base.BaseEntity;
 
-public abstract class BaseController<T extends BaseEntity> {
+public abstract class BaseController <T extends BaseEntity> {
 
 	public final static String SHOW_ACTION = "show";
 	public final static String CREATE_ACTION = "create";

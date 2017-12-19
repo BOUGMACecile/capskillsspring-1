@@ -5,11 +5,20 @@ import java.util.List;
 import com.capgemini.capskills.models.base.BaseEntity;
 
 public interface IBaseManager<T extends BaseEntity> {
-
+	
 	public void create(T item);
+
 	public void delete(T item);
-	public List getAll();
+
+	public List<T> getAll();
+
 	public T getById(Integer id);
+
 	public void update(T item);
 	
+	
+	//public List<T> createQuery(String query);
+	//public List<Skill> getAll();
+	
+	public List<T> select(String query);
 }

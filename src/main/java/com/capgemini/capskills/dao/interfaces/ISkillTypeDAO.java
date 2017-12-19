@@ -7,4 +7,5 @@ import com.capgemini.capskills.models.SkillType;
 
 @Repository
 public interface ISkillTypeDAO extends IBaseDAO<SkillType> {
+	
 }

@@ -2,6 +2,8 @@ package com.capgemini.capskills.dao;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.capskills.dao.base.BaseDAO;
@@ -10,21 +12,20 @@ import com.capgemini.capskills.models.Project;
 
 @Transactional
 public class ProjectDAO extends BaseDAO<Project> implements IProjectDAO {
-
 	@Override
 	public void create(Project item) {
-		entityManager.persist(item);		
+		entityManager.persist(item);
 	}
 
 	@Override
 	public void delete(Project item) {
-		entityManager.detach(item);
+		entityManager.remove(item);
 	}
 
-	@Override
-	public List getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("unchecked")
+    @Override
+	public List<Project> getAll() {
+		return entityManager.createQuery("SELECT proj FROM Project proj").getResultList();
 	}
 
 	@Override
@@ -36,4 +37,17 @@ public class ProjectDAO extends BaseDAO<Project> implements IProjectDAO {
 	public void update(Project item) {
 		entityManager.merge(item);
 	}
+
+	@Override
+	public Query createQuery(String qlString) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Project> select(String query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

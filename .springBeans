@@ -9,6 +9,7 @@
 	<configs>
 	</configs>
 	<autoconfigs>
+		<config>java:com.capgemini.capskills.CapskillsApplication</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
