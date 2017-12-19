@@ -15,22 +15,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capgemini.capskills.managers.UserManager;
-
+import com.capgemini.capskills.managers.base.UserManager;
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
 import com.capgemini.capskills.models.Skill;
 import com.capgemini.capskills.models.User;
 
 /**
  * Implements the following api requests
-<<<<<<< HEAD
+
  * Get all the users: 						GET URL/users/
  * Get a specific user with his id:			GET URL/users/{id}
  * Delete a specific user with his id:		DELETE URL/users/{id}
  * Add a user writing all the attributes:	POST 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
  * Update an user with all attributes:		PUT 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
  * Bind a skill to a user:					PUT 'URL/users/{userId}/{skillId}'
-=======
+
  * Get all the users: 							GET URL/users/
  * Get a specific user with his id:				GET URL/users/{id}
  * Display all this skills of a specific user:	GET URL/users/display-skills/{userId}
@@ -38,7 +37,7 @@ import com.capgemini.capskills.models.User;
  * Add a user writing all the attributes:		POST 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
  * Update an user with all attributes:			POST 'URL/users/?firstname=firstname&lastname=lastname&email=email&password=password&referent=referent'
  * Bind a skill to a user:						POST 'URL/users/{userId}/{skillId}'
->>>>>>> cecile
+
  * 
  * @author quentin.prigent
  *

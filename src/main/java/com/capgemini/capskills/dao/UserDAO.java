@@ -41,8 +41,19 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
 		entityManager.merge(item);
 	}
 
-	@Override
+	
 	public User getByEmail(String email) {
+		return (User) this.entityManager.createQuery("SELECT u FROM User u WHERE u.email=:email").setParameter("email", email).setMaxResults(1).getSingleResult();
+	}
+
+	@Override
+	public Query createQuery(String qlString) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> select(String query) {
 		// TODO Auto-generated method stub
 		return null;
 	}

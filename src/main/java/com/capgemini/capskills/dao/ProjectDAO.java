@@ -44,4 +44,10 @@ public class ProjectDAO extends BaseDAO<Project> implements IProjectDAO {
 		return null;
 	}
 
+	@Override
+	public List<Project> select(String query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

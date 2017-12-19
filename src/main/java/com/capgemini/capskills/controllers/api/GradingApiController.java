@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capgemini.capskills.managers.UserManager;
+import com.capgemini.capskills.managers.GradingManager;
+import com.capgemini.capskills.managers.base.UserManager;
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
 import com.capgemini.capskills.models.Grading;
 import com.capgemini.capskills.models.Skill;
@@ -54,6 +55,9 @@ public class GradingApiController {
 	@Autowired
 	private IBaseManager<Skill> managerSKill;
 	
+	
+	@Autowired
+	private GradingManager managerGranding;
 	/**
 	 * Method get all grades
 	 * @return
@@ -64,6 +68,13 @@ public class GradingApiController {
         return this.manager.getAll();
     }
 	
+	
+	@CrossOrigin(origins = "*")
+    @RequestMapping(value="/users/{userId}", method=RequestMethod.GET)
+    public List<Grading> getUserGradings(HttpServletResponse response, @PathVariable Integer userId) {
+		String query="SELECT g FROM Grading g WHERE g.user.id="+userId;
+        return (List<Grading> )this.manager.select(query);
+    }
     /**
      * Method to get a grading system with a specific id
      * @param id

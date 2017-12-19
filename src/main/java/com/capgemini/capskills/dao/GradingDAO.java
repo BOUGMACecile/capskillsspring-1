@@ -27,7 +27,7 @@ public class GradingDAO extends BaseDAO<Grading> implements IGradingDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Grading> getAll() {
-				return entityManager.createQuery("SELECT g FROM Grading g").getResultList();
+		return entityManager.createQuery("SELECT g FROM Grading g").getResultList();
 	}
 
 	@Override
@@ -47,4 +47,10 @@ public class GradingDAO extends BaseDAO<Grading> implements IGradingDAO{
 		return null;
 	}
 
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Grading> select(String query) {
+		return  this.entityManager.createQuery(query).getResultList();
+	}
 }

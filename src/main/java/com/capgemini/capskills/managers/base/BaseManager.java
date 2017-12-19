@@ -44,5 +44,10 @@ public abstract class BaseManager<T extends BaseEntity> implements IBaseManager<
 	protected IBaseDAO<T> getDao() {
 		return this.dao;
 	}
+	
+	@Override
+	public List<T> select(String query) {
+		return dao.select(query);
+	}
 }
 

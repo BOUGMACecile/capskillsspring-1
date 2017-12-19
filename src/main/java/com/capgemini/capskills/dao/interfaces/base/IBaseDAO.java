@@ -6,6 +6,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Service;
 
+import com.capgemini.capskills.models.Grading;
 import com.capgemini.capskills.models.base.BaseEntity;
 
 @Service
@@ -21,4 +22,6 @@ public abstract interface IBaseDAO<T extends BaseEntity> {
 	public void update(T item);
 	
 	public Query createQuery(String qlString);
+	
+	List<T> select(String query);
 }

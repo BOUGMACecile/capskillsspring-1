@@ -25,7 +25,7 @@ import com.capgemini.capskills.managers.ProjectManager;
 import com.capgemini.capskills.managers.SkillManager;
 
 import com.capgemini.capskills.managers.SkillTypeManager;
-import com.capgemini.capskills.managers.UserManager;
+import com.capgemini.capskills.managers.base.UserManager;
 import com.capgemini.capskills.managers.interfaces.base.IBaseManager;
 import com.capgemini.capskills.models.Grading;
 
