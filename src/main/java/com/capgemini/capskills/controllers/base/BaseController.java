@@ -18,7 +18,7 @@ public abstract class BaseController <T extends BaseEntity> {
 
 	public final static String REDIRECT = "redirect:";
 
-	public final static String PATH = "/";
+	public final static String PATH = "/"; 
 	public final static String PATH_SHOW_FILE = PATH + SHOW_ACTION;
 	public final static String PATH_CREATE_FILE = PATH + CREATE_ACTION;
 	public final static String PATH_UPDATE_FILE = PATH + UPDATE_ACTION;

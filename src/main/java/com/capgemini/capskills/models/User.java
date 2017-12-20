@@ -64,6 +64,8 @@ public class User extends BaseEntity {
 
 	public void setCollaborators(List<User> collaborators) {
 		this.collaborators = collaborators;
+
+		this.collaborators.forEach(c -> c.setCareerManager(this));
 	}
 	
 	public User getCareerManager() {
@@ -71,7 +73,13 @@ public class User extends BaseEntity {
 	}
 	
 	public void setCareerManager(User careerManager) {
-		this.careerManager = careerManager;
+		if (this.careerManager != careerManager) {
+			this.careerManager = careerManager;
+			
+			if (!this.careerManager.getCollaborators().contains(this)) {
+				this.careerManager.getCollaborators().add(this);
+			}
+		}
 	}
 
 	public String getFirstname() {

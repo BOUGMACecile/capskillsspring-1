@@ -1,6 +1,7 @@
 package com.capgemini.capskills.controllers.api;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capskills.managers.base.UserManager;
+import com.capgemini.capskills.models.Skill;
+import com.capgemini.capskills.models.SkillType;
 import com.capgemini.capskills.models.User;
 
 /**
@@ -103,7 +106,7 @@ public class UserApiController {
      */
     
     @RequestMapping(value="/", method=RequestMethod.POST)
-    public User create(@RequestParam String firstname, String lastname, String email, String password, Boolean referent) {
+    public User create(@RequestParam String firstname, String lastname, String email, String password, List<Integer> collaborators, Boolean referent) {
         User entity = new User();
 
         entity.setFirstname(firstname);
@@ -111,11 +114,24 @@ public class UserApiController {
         entity.setEmail(email);
         entity.setPassword(password);
         entity.setReferent(referent);
+        
+        manageCollaborators(collaborators, entity);
 
         this.manager.create(entity);
 
         return entity;
     }
+
+    /** The process to update collaborator in new/known user. */
+	private void manageCollaborators(List<Integer> collaborators, User entity) {
+		List<User> serfs = new LinkedList<>();
+		
+		if (collaborators != null) {
+	        collaborators.forEach(id -> serfs.add(this.manager.getById(id)));
+
+	        entity.setCollaborators(serfs);
+        }
+	}
 
     /**
      * Update an user, all the attributes are needed
@@ -127,10 +143,8 @@ public class UserApiController {
      * @param password
      * @return
      */
-    
-
     @RequestMapping(value="/{id}", method=RequestMethod.POST)
-    public User update(HttpServletResponse response, @PathVariable int id, @RequestParam String firstname, String lastname, String email, String password, Boolean referent) {
+    public User update(HttpServletResponse response, @PathVariable int id, @RequestParam String firstname, String lastname, String email, String password, List<Integer> collaborators, Boolean referent) {
     	
     	User entity = this.manager.getById(id);
     	
@@ -148,7 +162,9 @@ public class UserApiController {
         	entity.setReferent(referent);
         } else {
             response.setStatus(418);
-        } 
+        }
+        
+        this.manageCollaborators(collaborators, entity);
     	
     	this.manager.update(entity);
     	
@@ -184,6 +200,12 @@ public class UserApiController {
     	}   
         return this.getAll();
     }
+    
+    
+    
+    /*TEST WITH JULES*/
+    
+  
 }
 
 
