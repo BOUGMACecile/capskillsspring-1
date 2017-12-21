@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.capskills.managers.base.UserManager;
-import com.capgemini.capskills.models.Skill;
-import com.capgemini.capskills.models.SkillType;
 import com.capgemini.capskills.models.User;
 
 /**
@@ -106,7 +104,7 @@ public class UserApiController {
      */
     
     @RequestMapping(value="/", method=RequestMethod.POST)
-    public User create(@RequestParam String firstname, String lastname, String email, String password, List<Integer> collaborators, Boolean referent) {
+    public User create(@RequestParam String firstname, String lastname, String email, String password, /*List<Integer> collaborators,*/ Boolean referent) {
         User entity = new User();
 
         entity.setFirstname(firstname);
@@ -115,7 +113,7 @@ public class UserApiController {
         entity.setPassword(password);
         entity.setReferent(referent);
         
-        manageCollaborators(collaborators, entity);
+//        manageCollaborators(collaborators, entity);
 
         this.manager.create(entity);
 
